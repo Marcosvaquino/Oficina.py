@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Gerenciador de Carros</title>
+    </head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h1>Gerenciador de Carros </h1>
+
+    <form action="/cadastrar" method="POST">
+
+        <label for="placa">placa:</label>
+        <input type="text" name="placa" required>
+        <br>
+        <label for="modelo">modelo:</label>
+        <input type="text" name="modelo" required>
+        <br>
+        <label for="marca">marca:</label>
+        <input type="text" name="marca" required>
+        <br>
+        <label for="cor">cor:</label>
+        <input type="text" name="cor" required>
+        <br>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar Carro</button>
+        
+    </form>
+    <br>
+    <br>
+    <hr>
+    <h1> Lista de Carros</h1>
+
+    <ul>
+
+        {% for carro in carros %}
+
+        <li>
+            <a href="/consulta/{{carro.placa}}"> {{carro.placa}} - {{carro.modelo}} </a>
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+
+</div>
+
+
+</body>
+
+</html>
