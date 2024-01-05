@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Cadastrar Produtos</title>
+    </head>
+
+<body>
+    
+<div class="container mt-5">
+
+    <h1>cadastrar Produtos </h1>
+
+    <form action="/cadastrarProdutos" method="POST">
+
+
+        <!--<label for="idFornecedor">idFornecedor:</label>
+        <input type="text" name="idFornecedor" required>
+        <br>-->
+
+        <label for="codigo">codigo:</label>
+        <input type="text" name="codigo" maxlength="5" required>
+        <br>
+        <label for="descricao">descricao:</label>
+        <input type="text" name="descricao" maxlength="150" required>
+        <br>
+        <label for="preco">preco:</label>
+        <input type="text" name="preco" maxlength="20" required>
+        <br>
+        <label for="precoCusto">precoCusto:</label>
+        <input type="text" name="precoCusto" maxlength="20" required>
+        <br>
+        <label for="estoque">estoque:</label>
+        <input type="text" name="estoque" maxlength="20" required>
+        <br>
+        <label for="tipo">tipo:</label>
+        <input type="text" name="tipo" required>
+        <br>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar Produto </button>
+       
+       </form>
+       <br>
+       <br>
+       <hr>
+       <h1> Lista de Produtos</h1>
+
+
+       <ul>
+
+            {% for produto in produtos %}
+
+            <li>
+                <a href="/consulta/{{produto.idFornecedor}}"> {{produto.codigo}} - {{produto.descricao}} - {{produto.preco}} </a>
+            </li>
+
+            {% endfor %}
+
+       </ul>
+
+</div>   
+    
+</body>
+
+</html>
