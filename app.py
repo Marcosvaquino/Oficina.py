@@ -9,7 +9,7 @@ app = Flask(__name__,template_folder="View")
 
 @app.route('/')
 def index():
-    return render_template('index.html',carros = listadeCarros)
+    return render_template('carro.html',carros = listadeCarros)
 
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar():    
