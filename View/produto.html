@@ -1,18 +1,12 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <title>Cadastrar Produtos</title>
-    </head>
+{% extends 'base.html' %}
 
-<body>
+{% block body %}
     
 <div class="container mt-5">
 
     <h1>cadastrar Produtos </h1>
 
-    <form action="/cadastrarProdutos" method="POST">
+    <form action="/produto/cadastrar" method="POST">
 
 
         <!--<label for="idFornecedor">idFornecedor:</label>
@@ -60,6 +54,4 @@
 
 </div>   
     
-</body>
-
-</html>
+{% endblock %}
