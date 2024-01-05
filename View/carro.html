@@ -1,105 +1,12 @@
-<html>
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com"> <!-- adicionado -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> <!-- adicionado -->
-  <style>
-    html {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      height: 100vh;
-      font-family: calibri;
-    }
+{% block body %}
 
-    body {
-      
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30vw;
-        height: 100vh;
-        background-color: lightgray;
-        /* cor de fundo da página */
-        border-radius: 10px;
-      }
-
-      fieldset {
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        border-radius: 10px;
-        padding: 15px;
-        background-color: #8d8989;
-        color: #ffffff;
-      }
-
-      fieldset>div {
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px;
-        color: #a54c4c;
-
-      }
-
-      label {
-        font-size: 14px;
-        font-weight: bold;
-
-      }
-
-      input {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 0px;
-        border-radius: 10px;
-        border: 1px solid #555;
-        color: #4169E1;
-      }
-
-      .botao {
-        font-size: 15px;
-        font-weight: bold;
-        margin-top: 5px;
-        border-radius: 10px;
-        background-color: #0e7ae6;
-        border-color: #0e7ae6;
-        color: #ffffff;
-
-      }
-
-      h3 {
-        font-family: 'Roboto', sans-serif;
-        /* adicionado */
-      }
-
-      .consulta {
-        display: flex;
-        font-size: 15px;
-        font-weight: bold;
-        flex-direction: grid;
-        width: 250px;
-        border-radius: 10px;
-        padding: 15px;
-        background-color: #8d8989;
-        color: #f0e5e5;
-      }
-  </style>
-  <title>Gerenciador de Carros</title>
-</head>
-
-<body>
   <div class="container mt-5" style="margin: auto;"> <!-- centraliza o elemento -->
 
     <h3><b>Gerenciador de Carros</b></h3>
 
-    <form action="/cadastrarCarro" method="POST">
+    <form action="/carro/cadastrar" method="POST">
       <fieldset>
         <label for="placa">Placa:</label>
         <input type="text" name="placa" required>
@@ -135,8 +42,6 @@
 
     </ul>
 
-
   </div>
-</body>
-
-</html>
+  
+{% endblock %}
