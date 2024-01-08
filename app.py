@@ -1,33 +1,19 @@
-import os
-import sys
+from flask import Flask,render_template
 
-from flask import Flask, redirect,render_template,request,url_for
-from Model.carro import Carro
-from Controller.carroBLL import *
+from Routes.carro import carro
+from Routes.cliente import cliente
+from Routes.produto import produto
+from Routes.usuario import usuario
 
 app = Flask(__name__,template_folder="View")
 
-@app.route('/')
+app.register_blueprint(carro)
+app.register_blueprint(cliente)
+app.register_blueprint(produto)
+app.register_blueprint(usuario)
+
+@app.route("/")
 def index():
-    return render_template('index.html',carros = listadeCarros)
-
-@app.route('/cadastrar', methods=['POST'])
-def cadastrar():    
-    placa = request.form['placa']
-    modelo = request.form['modelo']
-    marca = request.form['marca']
-    cor = request.form['cor']
-
-    novo_carro = Carro(1,placa,modelo,marca,cor)
-
-    CarroBLL.setCarro(novo_carro)
-
-    return redirect(url_for('index'))
-
-@app.route('/consultar/<placa>')
-def consultar(placa):
-    carro = CarroBLL.getCarro(placa)
-
-    return render_template('consulta.html')
+    return render_template("index.html")
 
 app.run(debug=True)
