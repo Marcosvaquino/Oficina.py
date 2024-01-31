@@ -9,13 +9,16 @@ def index_carro():
     return render_template('carro.html',carros = CarroBLL.getListCarros())
 
 @carro.route('/carro/cadastrar', methods=['POST'])
-def cadastrar():    
-    placa = request.form['placa']
-    modelo = request.form['modelo']
-    marca = request.form['marca']
-    cor = request.form['cor']
+def cadastrar():
 
-    novo_carro = Carro(0,0,0,placa,modelo,marca,cor,0,0,0,"","","")
+    novo_carro = Carro()
+
+    novo_carro.id_oficina = 1
+    novo_carro.id_cliente = 1
+    novo_carro.placa = request.form['placa']
+    novo_carro.modelo = request.form['modelo']
+    novo_carro.marca = request.form['marca']
+    novo_carro.cor = request.form['cor']
 
     CarroBLL.setCarro(novo_carro)
 
