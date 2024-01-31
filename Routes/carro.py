@@ -6,7 +6,7 @@ carro = Blueprint('carro',__name__,template_folder="View")
 
 @carro.route('/carro')
 def index_carro():
-    return render_template('carro.html',carros = listadeCarros)
+    return render_template('carro.html',carros = CarroBLL.getListCarros())
 
 @carro.route('/carro/cadastrar', methods=['POST'])
 def cadastrar():    
@@ -15,7 +15,7 @@ def cadastrar():
     marca = request.form['marca']
     cor = request.form['cor']
 
-    novo_carro = Carro(1,placa,modelo,marca,cor)
+    novo_carro = Carro(0,0,0,placa,modelo,marca,cor,0,0,0,"","","")
 
     CarroBLL.setCarro(novo_carro)
 
