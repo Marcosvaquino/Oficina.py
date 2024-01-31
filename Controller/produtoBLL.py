@@ -3,8 +3,7 @@ from Model.produto import Produto
 ListadeProdutos=[]
 
 class ProdutoBLL():      
-   
-            
+               
     #inserir produto na lista de produtos
     def setProduto(produto:Produto):
         ListadeProdutos.append(produto)
