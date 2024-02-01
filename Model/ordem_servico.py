@@ -1,26 +1,27 @@
 from dataclasses import dataclass
 from datetime import datetime
+from Data.base import db
 
 @dataclass
-class os:
-    id: int
-    id_carro: int
-    id_cliente: int
-    id_oficina: int
-    id_usuario: int
-    status: int
-    valor_total: float
-    valor_desconto: float
-    valor_acrescimo: float
-    observacoes: str
-    data_previsao: datetime
-    data_criacao: datetime
-    data_atualizacao: datetime
+class os(db.Model):
+    id: int = db.Column(db.Integer, primary_key=True)
+    id_carro: int = db.Column(db.Integer)
+    id_cliente: int = db.Column(db.Integer)
+    id_oficina: int = db.Column(db.Integer) 
+    id_usuario: int = db.Column(db.Integer)
+    status: int = db.Column(db.Integer)
+    valor_total: float = db.Column(db.Float)
+    valor_desconto: float = db.Column(db.Float)
+    valor_acrescimo: float = db.Column(db.Float)
+    observacoes: str = db.Column(db.String(200))
+    data_previsao: datetime = db.Column(db.DateTime)
+    data_criacao: datetime = db.Column(db.DateTime)
+    data_atualizacao: datetime = db.Column(db.DateTime)
 
-class item_os:
-    id: int
-    id_os: int
-    id_produto: int
-    qtd: int
-    valor_venda: float    
+class item_os(db.Model):
+    id: int = db.Column(db.Integer, primary_key=True)
+    id_os: int = db.Column(db.Integer)
+    id_produto: int = db.Column(db.Integer)
+    qtd: int = db.Column(db.Integer)    
+    valor_venda: float = db.Column(db.Float)     
     

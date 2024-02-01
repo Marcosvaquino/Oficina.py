@@ -1,6 +1,11 @@
-{% extends 'base.html' %}
+{% extends "layouts/base-fullscreen.html" %}
 
-{% block body %}
+{% block title %} Entrar {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
 
 <a href="/carro">Carro</a>
 </br>
@@ -10,4 +15,4 @@
 </br>
 <a href="/usuario">Usuario</a>
 
-{% endblock %}
+{% endblock %}

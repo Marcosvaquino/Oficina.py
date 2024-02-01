@@ -14,7 +14,10 @@ class CarroBLL():
     
     #localizando o carro na lista de carros
     def getCarro(placa:str)->Carro:
-        return Carro.query.filter_by(placa=placa).first()         
+        return Carro.query.filter_by(placa=placa).first()
+
+    def getCarrosCliente(id:int)->[]:
+        return Carro.query.filter_by(cliente_id=id).all()         
     
     #listando todos os carros cadastrados
     def getListCarros()->[]:
