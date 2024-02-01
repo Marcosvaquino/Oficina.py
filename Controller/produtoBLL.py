@@ -1,21 +1,18 @@
-from Model.produto import Produto
-
-ListadeProdutos=[]
-
+from Model.produto import Produto,db
 class ProdutoBLL():      
                
     #inserir produto na lista de produtos
     def setProduto(produto:Produto):
-        ListadeProdutos.append(produto)
-
+        db.session.add(produto)
+        db.session.commit()
+        
     #localizando produto na lista de produtos
     def getProduto(id:str)->Produto:
-        produto = next((c for c in ListadeProdutos if c.id == id),None)
-        return produto
+        return db.session.query(Produto).filter_by(id=id).first()
 
     #listando todos os produto na lista de produtos
     def getListadeProduos()->[]:
-        return ListadeProdutos
+        return db.session.query(Produto).all()
     
 
     
