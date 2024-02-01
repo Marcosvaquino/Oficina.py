@@ -1,18 +1,15 @@
-from Model.cliente import Cliente
-
-listaDeClientes = []
-
+from Model.cliente import Cliente,db
 class ClienteBLL():
 
     # Inserindo cliente na lista de clientes
     def setCliente(cliente: Cliente):
-        listaDeClientes.append(cliente)
-
+        db.session.add(cliente)
+        db.session.commit()
+        
     # Localizando o cliente na lista de clientes pelo CPF
     def getCliente(cpf: int) -> Cliente:
-        cliente = next((c for c in listaDeClientes if c.cpf == cpf), None)
-        return cliente
+        return db.session.query(Cliente).filter_by(cpf=cpf).first()
 
     # Listando todos os clientes cadastrados
     def getListClientes() -> []:
-        return listaDeClientes
+        db.session.query(Cliente).all()

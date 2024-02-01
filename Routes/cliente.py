@@ -1,12 +1,12 @@
 from flask import Blueprint, redirect,render_template,request,url_for
 from Model.cliente import Cliente
-from Controller.clienteBLL import *
+from Controller.clienteBLL import ClienteBLL
 
 cliente = Blueprint('cliente',__name__,template_folder="View")
 
 @cliente.route('/cliente')
 def index_cliente():
-    return render_template('cliente.html',clientes = listaDeClientes)
+    return render_template('cliente.html',clientes = ClienteBLL.getListClientes())
 
 @cliente.route('/cliente/cadastrar', methods=['POST'])
 def cadastrar():
