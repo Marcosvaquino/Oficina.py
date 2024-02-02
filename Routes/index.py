@@ -1,6 +1,7 @@
 from flask import Blueprint,  render_template,request,redirect,url_for,session
 from Controller.usuarioBLL import UsuarioBLL
 from Controller.form import CreateAccountForm, LoginForm
+from Model.oficina import Oficina
 
 index = Blueprint('index', __name__)
 
@@ -43,6 +44,16 @@ def getIndex():
 def register():
     create_account_form = CreateAccountForm(request.form)
     if 'register' in request.form:
+
+        nova_oficina = Oficina()
+
+        nova_oficina.nome_fantasia = request.form['nome_fantasia']
+        nova_oficina.cnpj = request.form['cnpj_create']
+
+
+        
+
+
 
         username = request.form['username']
         email = request.form['email']
