@@ -1,45 +1,102 @@
-{% extends 'base.html' %}
+{% extends "layouts/base-fullscreen.html" %}
 
-{% block body %}
-  <div class="container mt-5" style="margin: auto;">
-    <h3><b>Gerenciador de Clientes</b></h3>
 
-    <!-- Formulário de cadastro de carros -->
-    <!-- ... restante do código ... -->
+{% block title %} Cadastro Cliente {% endblock %} 
 
-    <!-- Formulário de cadastro de clientes -->
-    <form action="/cliente/cadastrar" method="POST">
-      <fieldset>
-        <label for="nome">Nome do cliente:</label>
-        <input type="text" name="nome" required>
-        <br>
-        <label for="cpf">CPF do cliente:</label>
-        <input type="text" name="cpf" required>
-        <br>
-        <label for="telefone">Telefone do cliente:</label>
-        <input type="text" name="telefone" required>
-        <br>
-        <button type="submit" class="botao">Cadastrar Cliente</button>
-      </fieldset>
-    </form>
-    <br>
-    <br>
-    <hr>
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
 
-    <!-- Lista de carros -->
-    <!-- ... restante do código ... -->
+{% block content %}
+    
+  <div class="page-header align-items-start min-vh-100" 
+        style="background-image: url('/static/assets/img/illustrations/cadastro.cliente.jpg'); background-size: cover; background-position: center;">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container my-auto" style="height: 600px;">
+      <div class="row">
+        <div class="col-lg-7 col-md-8 col-12 mx-auto">
+          <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                  Oficina Py
+                </h4>
 
-    <!-- Lista de clientes -->
-    <h3><b>Lista de Clientes</b></h3>
-    <fieldset style="padding: 0%;">
-      <ul type="square">
-        {% for cliente in clientes %}
-        <li>
-          <a href="/consultaCliente/{{cliente.cpf}}" class="consultaCliente"> {{cliente.nome}} --- {{cliente.cpf}} --- {{cliente.telefone}} </a>
-        </li>
-        {% endfor %}
-      </fieldset>
-    </ul>
-  </div>
-{% endblock %}
+                </div>
+              </div>
 
+            <div class="container mt-3" style="margin-left: auto;"> <!-- centraliza o elemento -->
+
+              <h3><b>Cadastro de Cliente</b></h3>
+
+              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+          
+              <form action="/cliente/cadastrar" method="POST">
+          
+                <fieldset>
+                  <form>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label for="id cliente">ID Cliente:</label>
+                        <input type="text" class="form-control" name="id_cliente" readonly>
+                      </div>
+                        
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" name="nome" required>
+                      </div>
+                      
+                      <div class="form-group col-md-6">
+                        <label for="fone">Fone:</label>
+                        <input type="text" class="form-control" name="fone" required>
+                      </div>
+                  
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="cpf_cnpj">CPF/CNPJ:</label>
+                        <input type="text" class="form-control" name="cpf_cnpj" required>
+                      </div>
+                  
+                      <div class="form-group col-md-6">
+                        <label for="cep">CEP:</label>
+                        <input type="text" class="form-control" name="cep" required>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="logradouro">Logradouro:</label>
+                        <input type="text" class="form-control" name="logradouro" required>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="numero">Numero:</label>
+                        <input type="text" class="form-control" name="numero" required>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" class="form-control" name="bairro" required>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" class="form-control" name="cidade" required>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="uf">UF:</label>
+                        <input type="text" class="form-control" name="uf" required>
+                      </div>
+                     </div>
+                  
+                    <button type="submit" class="btn btn-success">Cadastrar Cliente</button>
+                  </form>
+
+                </fieldset>
+              </form>
+
+{% endblock content %}
+
+<!-- Pagina javascripit  -->
+{% block javascripts %}{% endblock javascripts %}
+                      

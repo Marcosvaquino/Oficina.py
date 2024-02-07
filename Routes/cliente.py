@@ -6,24 +6,26 @@ cliente = Blueprint('cliente',__name__,template_folder="View")
 
 @cliente.route('/cliente')
 def index_cliente():
-    return render_template('cliente.html',clientes = ClienteBLL.getListClientes())
+    return render_template('pre_cadastro.html',clientes = ClienteBLL.getListClientes())
 
 @cliente.route('/cliente/cadastrar', methods=['POST'])
 def cadastrar():
 
-    nome = request.form['nome']
-    cpf = request.form['cpf']
-    telefone = request.form['telefone']
-    logradouro = ''
-    cep=''
-    numero = ''
-    bairro = ''
-    cidade = ''
-    uf='' 
-    observacoes = ''
-    carros=[]   
+    novo_cliente = Cliente()
 
-    novo_cliente = Cliente(1,nome,cpf,telefone,logradouro,cep,numero,bairro,cidade,uf,observacoes,carros)
+
+    novo_cliente.nome = request.form['nome']
+    novo_cliente.cpf_cnpj = request.form['cpf']
+    novo_cliente.fone = request.form['telefone']
+    novo_cliente.logradouro = ''
+    novo_cliente.cep=''
+    novo_cliente.numero = ''
+    novo_cliente.bairro = ''
+    novo_cliente.cidade = ''
+    novo_cliente.uf='' 
+    novo_cliente.observacao = ''
+    
+    
 
     ClienteBLL.setCliente(novo_cliente)
     
