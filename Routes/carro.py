@@ -14,11 +14,14 @@ def cadastrar():
     novo_carro = Carro()
 
     novo_carro.id_oficina = 1
-    novo_carro.id_cliente = 1
+    novo_carro.id_cliente = request.form['id_cliente']
     novo_carro.placa = request.form['placa']
     novo_carro.modelo = request.form['modelo']
     novo_carro.marca = request.form['marca']
     novo_carro.cor = request.form['cor']
+    novo_carro.ano_fabricacao = request.form['ano_fabricacao']
+    novo_carro.ano_modelo = request.form['ano_modelo']
+
 
     CarroBLL.setCarro(novo_carro)
 

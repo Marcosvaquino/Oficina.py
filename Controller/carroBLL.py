@@ -5,8 +5,8 @@ class CarroBLL():
     #inserindo o carro lista de carros
     def setCarro(carro:Carro):
         db.session.add(carro)
-        db.session.commit()
-
+        db.session.commit()        
+        
     #atualizar o carro na lista de carros
     def updateCarro(carro:Carro):
         db.session.merge(carro)

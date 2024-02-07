@@ -1,5 +1,7 @@
 from typing import Any
 from dataclasses import dataclass
+from datetime import datetime
+from typing import List
 from Data.base import db
 @dataclass
 class Carro(db.Model):
@@ -14,7 +16,7 @@ class Carro(db.Model):
     ano_modelo:int = db.Column(db.Integer) 
     status:int = db.Column(db.Integer)
     observacao:str = db.Column(db.String(200))
-    data_criacao:str = db.Column(db.DateTime)
-    data_atualizacao:str = db.Column(db.DateTime)
+    data_criacao:datetime = db.Column(db.DateTime, default=datetime.now)
+    data_atualizacao:datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
    
