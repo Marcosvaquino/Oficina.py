@@ -19,6 +19,7 @@
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <h6 class="text-white text-capitalize ps-3">Carros Cadastrados</h6>
+            <button class="btn bg-gradient-primary" onclick="openModalCarros('0')">Cadastrar novo</button>
           </div>
         </div>
 
@@ -96,7 +97,7 @@
                       {% endif %}
                       
                       <td class="align-middle">
-                        <button class="btn bg-gradient-primary" onclick="openModal('{{carro.id}}')">Editar</button>
+                        <button class="btn bg-gradient-primary" onclick="openModalCarros('{{carro.id}}')">Editar</button>
                       </td>
 
                     </tr>

@@ -23,6 +23,8 @@ try:
 except KeyError:
     exit('Error: Invalid <config_mode>. Expected values [Debug, Production] ')
 
+
+
 app = Flask(__name__,template_folder="View")
 app.config['SQLALCHEMY_DATABASE_URI'] = connectionString()
 
