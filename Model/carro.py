@@ -1,7 +1,6 @@
-from typing import Any
+from enum import Enum
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
 from Data.base import db
 @dataclass
 class Carro(db.Model):
@@ -18,5 +17,13 @@ class Carro(db.Model):
     observacao:str = db.Column(db.String(200))
     data_criacao:datetime = db.Column(db.DateTime, default=datetime.now)
     data_atualizacao:datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+class statusCarro(Enum):
+    pendente = 0
+    em_andamento = 1
+    finalizado = 2
+    cancelado = 3
+
+
 
    

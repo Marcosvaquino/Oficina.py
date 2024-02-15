@@ -18,6 +18,7 @@ class Cliente(db.Model):
     bairro: str = db.Column(db.String(50))
     cidade: str = db.Column(db.String(50))
     uf: str = db.Column(db.String(2))
+    complemento: str = db.Column(db.String(50))
     observacao: str = db.Column(db.String(200))
     data_criacao:datetime = db.Column(db.DateTime, default=datetime.now)
     data_atualizacao:datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)

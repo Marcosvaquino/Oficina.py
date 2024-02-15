@@ -1,4 +1,5 @@
 
+from flask import session
 from Model.carro import Carro,db
 class CarroBLL():
 
@@ -16,9 +17,9 @@ class CarroBLL():
     def getCarro(placa:str)->Carro:
         return Carro.query.filter_by(placa=placa).first()
 
-    def getCarrosCliente(id:int)->[]:
-        return Carro.query.filter_by(cliente_id=id).all()         
+    def getCarrosCliente(id:int)->list:
+        return Carro.query.filter_by(id_cliente=id).all()         
     
     #listando todos os carros cadastrados
-    def getListCarros()->[]:
-        return Carro.query.all()        
+    def getListCarros()->list:
+        return Carro.query.filter_by(id_oficina=session['id_oficina']).all()        
