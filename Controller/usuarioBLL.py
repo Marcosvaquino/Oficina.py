@@ -12,8 +12,7 @@ class UsuarioBLL():
         
     # Localizando o usuário na lista de usuários pelo CPF
     def getUsuario(id: int) -> Usuario:
-        return db.session.query(Usuario).filter_by(id=id).first()
-              
+        return db.session.query(Usuario).filter_by(id=id).first()              
 
     # Listando todos os usuários cadastrados
     def getListUsuarios() -> []:

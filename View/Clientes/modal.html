@@ -1,0 +1,95 @@
+<div id="modalCliente" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalCliente()">&times;</span>
+          <form action="/cliente/cadastrar" method="post">
+          <fieldset>
+            <form>              
+
+              <div class="form-row">
+
+                  <input type="text"  name="id" hidden>  
+                  <input type="text"  name="id_oficina" hidden>                  
+
+                <div class="form-group col-md-6">
+                  <label for="nome">Nome:</label>
+                  {{ form.nome(class='form-control',placeholder='Informar o nome') }}
+                </div>
+            
+                <div class="form-group col-md-6">
+                  <label for="fone">Fone:</label>
+                  {{form.fone(class='form-control',placeholder='Informar o fone')}}
+                </div>
+
+              </div>
+            
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="cpf_cnpj">CPF ou CPNJ:</label>
+                  {{form.cpf_cnpj(class='form-control',placeholder='Informar o CPF ou CNPJ')}}
+                </div>
+                
+                <div class="form-group col-md-6">
+                  <label for="cep">CEP:</label>
+                  {{form.cep(class='form-control',placeholder='Informar o fone')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="logradouro">Endereço:</label>
+                  {{form.logradouro(class='form-control',placeholder='Informar o endereço')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="numero">Numero:</label>
+                  {{form.numero(class='form-control',placeholder='Informar o fone')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="bairro">Bairro:</label>
+                  {{form.bairro(class='form-control',placeholder='Informar o bairro')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="cidade">Cidade:</label>
+                  {{form.cidade(class='form-control',placeholder='Informar a cidade')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="uf">Estado:</label>
+                  {{form.uf(class='form-control',placeholder='Informar o sstado')}}
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="Complemento">Complementos:</label>
+                  {{form.complemento(class='form-control',placeholder='Ex: Casa ou Apartamento 101')}}
+                </div>                  
+                <div class="form-group col-md-12">
+                  <label for="observacao">Obs:</label>
+                  {{form.observacao(class='form-control',placeholder='descreva aqui as observações do cliente')}}
+                </div>
+                
+                <div class="form-group col-md-4">
+                  <label for="status">Status:</label>
+                  {{form.status(class='form-control',placeholder='Selecionar o status')}}
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="data_cadastro">Cadastrado em:</label>
+                  <input type="text" class="form-control" name="data_cadastro" readonly>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="data_atualizacao">Atualizado em:</label>
+                  <input type="text" class="form-control" name="data_atualizacao" readonly>
+                </div>
+
+              </div>
+            
+              <button type="submit" class="btn btn-success">Salvar</button>
+
+            </form>
+
+          </fieldset>
+        </form>
+    </div>
+  </div>

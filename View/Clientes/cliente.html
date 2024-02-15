@@ -1,0 +1,115 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Lista de Clientes {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link href="/static/assets/css/modal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="container-fluid py-4">
+
+    <div class="row">
+
+      <div class="col-12">
+        
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Clientes Cadastrados</h6>
+            <button class="btn bg-gradient-primary" onclick="openModalCliente('0')">Cadastrar novo</button>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fone / Endereço</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cor / Ano</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                    <th class="text-secondary opacity-7"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for cliente in clientes %}
+
+                    <tr data-id="{{ cliente.id }}">
+
+                      <td>
+                        <div class="d-flex px-2 py-1">                      
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{cliente.nome}}</h6>
+                            <p class="text-xs text-secondary mb-0">{{cliente.cpf_cnpj}}</p>
+                          </div>
+
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">                      
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{cliente.fone}}</h6>
+                            <p class="text-xs text-secondary mb-0">{{cliente.logradouro}}</p>
+                          </div>
+
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">                      
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{cliente.numero}}</h6>
+                            <p class="text-xs text-secondary mb-0">{{cliente.bairro}}</p>
+                          </div>
+
+                        </div>
+                      </td>
+                      
+                      {% if cliente.status == 0 %}
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-danger">Inativo</span>
+                        </td>  
+                      {% else %}
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success">Ativo</span>
+                        </td>
+                      {% endif %}
+                      
+                      <td class="align-middle">
+                        <button class="btn bg-gradient-primary" onclick="openModalCliente('{{cliente.id}}')">Editar</button>
+                      </td>
+
+                    </tr>
+
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'Clientes/modal.html' %}
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% include 'Clientes/scripts.html' %}
+
+{% endblock javascripts %}

@@ -47,17 +47,25 @@
                       {{ form.hidden_tag() }} 
 
                       <div class="input-group input-group-outline mb-3">
-                        {{ form.username(class="form-control", placeholder="Nome usuario") }}
+                        {{ form.cnpj(class="form-control", placeholder="CPF ou CNPJ") }}
                       </div>
+
+                      <div class="input-group input-group-outline mb-3">
+                        {{ form.nome_fantasia(class="form-control", placeholder="Nome da Oficina") }}
+                      </div>                     
+
                       <div class="input-group input-group-outline mb-3">
                         {{ form.email(class="form-control", type="email", placeholder="Email") }}
                       </div>
+                      
                       <div class="input-group input-group-outline mb-3">
-                        {{ form.password(class="form-control", type="password", placeholder="Senha") }}
+                        {{ form.password(class="form-control", type="password", placeholder="Crie uma senha de acesso") }}
                       </div>
+                      
                       <div class="input-group input-group-outline mb-3">
-                        {{ form.cnpj(class="form-control", placeholder="Digite o CNPJ") }}
+                        {{ form.password_confirm(class="form-control", type="password", placeholder="Repita a senha de acesso") }}
                       </div>
+
                       <div class="form-check form-check-info text-start ps-0">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
                         <label class="form-check-label" for="flexCheckDefault">
