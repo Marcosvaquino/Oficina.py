@@ -1,0 +1,52 @@
+<div id="modalProduto" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalProdutos()">&times;</span>
+            <form action="/produto/cadastrar" method="post">
+            <fieldset>
+                <form>
+
+                    <div class="form-row">
+
+                        <input type="text" name="id" hidden>
+                        <input type="text" name="id_cliente" hidden>
+                        <input type="text" name="id_oficina" hidden>
+
+                        <div class="form-group col-md-6">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" class="form-control" name="codigo" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="descricao">Descricao</label>
+                            <input type="text" class="form-control" name="descricao" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="preco">Preço</label>
+                            <input type="text" class="form-control" name="preco" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="precoCusto">Preço de Custo</label>
+                            <input type="text" class="form-control" name="preco_custo" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="estoque">Estoque</label>
+                            <input type="text" class="form-control" name="estoque" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="tipo">tipo [produto ou serviço]</label>
+                            <input type="text" class="form-control" name="tipo" required>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Salvar</button>
+
+                </form>
+            </fieldset>
+            </form>
+    </div>
+</div>

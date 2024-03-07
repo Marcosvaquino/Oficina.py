@@ -11,7 +11,7 @@ class ProdutoBLL():
         return db.session.query(Produto).filter_by(id=id).first()
 
     #listando todos os produto na lista de produtos
-    def getListadeProduos()->[]:
+    def getListadeProdutos()->list:
         return db.session.query(Produto).all()
     
 
