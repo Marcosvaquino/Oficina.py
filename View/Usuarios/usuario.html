@@ -1,42 +1,106 @@
-{% extends 'base.html' %}
+{% extends "layouts/base.html" %}
 
-{% block body %}
-  <div class="container mt-5" style="margin: auto;">
-    <h3><b>Cadastro de Usuários</b></h3>
+{% block title %} Lista de Usuarios {% endblock %} 
 
-    <!-- Formulário de cadastro de clientes -->
-    <form action="/usuario/cadastrar" method="POST">
-      <fieldset>
-        <label for="nome">Usuário:</label>
-        <input type="text" name="nome" required>
-        <br>
-        <label for="login">Login:</label>
-        <input type="text" name="login" required>
-        <br>
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" required>
-        <br>
-        <label for="email">E-mail:</label>
-        <input type="text" name="email" required>
-        <br>
-        <button type="submit" class="botao">Cadastrar Usuário</button>
-      </fieldset>
-    </form>
-    <br>
-    <br>
-    <hr>
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link href="/static/assets/css/modal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock stylesheets %}
 
-    <!-- Lista de clientes -->
-    <h3><b>Cadastro de Usuários</b></h3>
-    <fieldset style="padding: 0%;">
-      <ul type="square">
-        {% for usuario in usuarios %}
-        <li>
-          <a href="/consultaUsuario/{{usuario.login}}" class="consultaUsuario"> {{usuario.login}} --- {{usuario.senha}} </a>
-        </li>
-        {% endfor %}
-      </fieldset>
-    </ul>
-  </div>
-{% endblock %}
+{% block content %}
+  <div class="container-fluid py-4">
 
+    <div class="row">
+
+      <div class="col-12">
+        
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Usuarios Cadastrados</h6>
+            <button class="btn bg-gradient-primary" onclick="openModalUsuarios('0')">Cadastrar novo</button>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Login</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Senha</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ativo</th>
+                    <th class="text-secondary opacity-7"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for usuario in usuarios %}
+
+                    <tr data-id="{{ usuario.id}}">
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{usuario.nome}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{usuario.login}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{usuario.senha}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class=" d-flex px-2 py-1">
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{usuario.tipo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{usuario.ativo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'Usuarios/modal.html' %}
+
+  </div>    
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+{% include 'Usuarios/scripts.html' %}
+
+{% endblock javascripts %}

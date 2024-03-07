@@ -1,0 +1,87 @@
+<script>
+    function openModalUsuarios(id) {
+      
+      var usuario = JSON.parse('{{ usuarios | tojson | safe }}');
+  
+      function encontarUsuarioPorID(usuarios, id) {
+        try{
+          for(var i = 0; i < usuarios.length; i++) {
+            if (usuarios[i].id == id) {
+              return usuarios[i];
+            }
+          }
+          return null;
+        }catch(e){
+          return null;
+        }
+      }
+  
+      function formatarData(d) {
+        try{
+          var dataSelecionada = new Date(d);
+            var dia = dataSelecionada.getDate().toString().padStart(2, '0');
+            var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
+            var ano = dataSelecionada.getFullYear();
+            var dataFormatada = dia + '/' + mes + '/' + ano;
+            return dataFormatada;
+          }catch(e){
+            return '';
+          }
+      }
+  
+      if (id === '0') {
+  
+        try{
+            document.getElementsByName('id')[0].value = '0';
+            document.getElementsByName('id_oficina')[0].value = '';
+            
+            document.getElementsByName('nome')[0].value = '';
+            document.getElementsByName('login')[0].value = '';
+            document.getElementsByName('senha')[0].value = '';
+            document.getElementsByName('tipo')[0].value = '';
+            document.getElementsByName('ativo')[0].value = '';
+          
+            //document.getElementsByName('data_cadastro')[0].value = '';
+            //document.getElementsByName('data_atualizacao')[0].value = '';
+  
+            document.getElementById('modalUsurio').style.display = 'block';
+  
+          return;
+        }catch(e){
+          alert('Error aqui: '+ e)
+          return;
+        }
+  
+      }else{
+  
+          var usuarioEncontrado = encontarUsuarioporID(produto, id);
+  
+          if (usuarioEncontrado == null) {
+            alert('Usuario não encontrado');
+            return;
+          }
+  
+          try{
+            document.getElementsByName('id')[0].value = usuarioEncontrado.id;
+            document.getElementsByName('id_oficina')[0].value = usuarioEncontrado.id_oficina;
+            
+            document.getElementsByName('nome')[0].value = usuarioEncontrado.nome;
+            document.getElementsByName('login')[0].value = usuarioEncontrado.login;
+            document.getElementsByName('senha')[0].value = usuarioEncontrado.senha;
+            document.getElementsByName('tipo')[0].value = usuarioEncontrado.tipo;
+            document.getElementsByName('ativo')[0].value = usuarioEncontrado.ativo;
+          
+            //document.getElementsByName('data_cadastro')[0].value = formatarData(carroEncontrado.data_criacao);
+            //document.getElementsByName('data_atualizacao')[0].value = formatarData(carroEncontrado.data_atualizacao);
+          }catch(e){
+            alert('Erro ao preencher os campos' + e);
+          }
+          document.getElementById('modalUsurio').style.display = 'block';
+      }
+    }
+  
+    function closeModalUsuarios() {
+      document.getElementById("modalUsurio").style.display = "none";
+    }
+  
+  </script>
