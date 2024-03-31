@@ -1,54 +1,114 @@
-{% extends 'base.html' %}
+{% extends "layouts/base.html" %}
 
-{% block body %}
-    
-<div class="container mt-5">
+{% block title %} Lista de Produtos {% endblock %} 
 
-    <h1>cadastrar Produtos </h1>
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link href="/static/assets/css/modal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock stylesheets %}
 
-    <form action="/produto/cadastrar" method="POST">
+{% block content %}
+  <div class="container-fluid py-4">
 
-        <fieldset>
-        <label for="codigo">codigo do produto:</label>
-        <input type="text" name="codigo" maxlength="5" required>
-        <br>
-        <label for="descricao">descricao:</label>
-        <input type="text" name="descricao" maxlength="150" required>
-        <br>
-        <label for="preco">preco de venda:</label>
-        <input type="text" name="preco" maxlength="20" required>
-        <br>
-        <label for="precoCusto">preco Custo:</label>
-        <input type="text" name="precoCusto" maxlength="20" required>
-        <br>
-        <label for="estoque">estoque de produtos:</label>
-        <input type="text" name="estoque" maxlength="20" required>
-        <br>
-        <label for="tipo">tipo [produto ou serviço]:</label>
-        <input type="text" name="tipo" required>
-        <br>
-        <button type="submit" class="btn btn-primary mt-3">Cadastrar Produto </button>
-        </fieldset>
+    <div class="row">
+
+      <div class="col-12">
         
-       </form>
-       <br>
-       <br>
-       <hr>
-       <h1> Lista de Produtos</h1>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Produtos Cadastrados</h6>
+            <button class="btn bg-gradient-primary" onclick="openModalProdutos('0')">Cadastrar novo</button>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo do produto</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço produto</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço custo</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estoque</th>
+                    <th class="text-secondary opacity-7"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for produto in produtos %}
+
+                    <tr data-id="{{ produto.id}}">
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class=" d-flex px-2 py-1">
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'Produtos/modal.html' %}
+
+  </div>    
 
 
-       <ul>
+{% endblock content %}
 
-            {% for produto in produtos %}
+{% block javascripts %}
 
-            <li>
-                <a href="/consulta/{{produto.idFornecedor}}"> {{produto.codigo}} - {{produto.descricao}} - {{produto.preco}} </a>
-            </li>
+{% include 'Produtos/scripts.html' %}
 
-            {% endfor %}
-
-       </ul>
-
-</div>   
-    
-{% endblock %}
+{% endblock javascripts %}
