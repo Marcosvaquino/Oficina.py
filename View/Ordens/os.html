@@ -1,0 +1,115 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Ordem de Serviço{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link href="/static/assets/css/modal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container-fluid py-4">
+
+    <div class="row">
+
+      <div class="col-12">
+        
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Ordem Serviço</h6>
+            <button class="btn bg-gradient-primary" onclick="openModalProdutos('0')">Cadastrar novo</button>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtd</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">unitario</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">total</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">mecanico</th>
+                    <th class="text-secondary opacity-7"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for produto in produtos %}
+
+                    <tr data-id="{{ produto.id}}">
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class=" d-flex px-2 py-1">
+
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'Ordens/modal.html' %}
+
+  </div>    
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+{% include 'Ordens/scripts.html' %}
+
+{% endblock javascripts %}
