@@ -17,9 +17,28 @@
         
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Ordem Serviço</h6>
-            <button class="btn bg-gradient-primary" onclick="openModalProdutos('0')">Cadastrar novo</button>
+
+             <div class = "row">
+                <div class="col-6">
+                    <p>Criada em: {{ os.data_criacao }}</p>
+                    <p>Atualizada em: {{ os.data_atualizacao }}</p>                    
+                </div>
+                <div class="col-6">
+                    <label for="status">Status O.S.</label>
+                    <input type="text" class="form-control" name="status" id="status">
+                    <button class="btn bg-gradient-primary" onclick="openModalItens('0')">Alterar Status</button>
+                </div>
+            </div>   
+          
           </div>
+        </div>
+
+        <div class="row">
+
+            
+
+
+
         </div>
 
         <div class="card my-4">
@@ -98,7 +117,38 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+
+            <div class="col-6">
+
+                <!--campo de texto para observacoes-->
+                <div class="form-group">
+                    <label for="observacoes">Observações</label>
+                    <textarea class="form-control" name="observacoes" id="observacoes" rows="7"></textarea>
+                </div>
+
+            </div>
+
+            <div class="col-6">
+
+                <!--campos de desconto, adicionais e valor total-->
+                <div class="form-group">
+                    <label for="desconto">Desconto</label>
+                    <input type="text" class="form-control" name="desconto" id="desconto">
+                    <label for="adicional">Adicional</label>
+                    <input type="text" class="form-control" name="adicional" id="adicional">
+                    <label for="adicional">Total</label>
+                    <input type="text" class="form-control" name="total" id="total">
+                </div>                   
+
+            </div>
+
+
+        </div>
+
       </div>
+
     </div>
 
     {% include 'Ordens/modal.html' %}
