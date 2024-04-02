@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+import enum
 from Data.base import db
 
 @dataclass
@@ -23,5 +24,16 @@ class item_os(db.Model):
     id_os: int = db.Column(db.Integer)
     id_produto: int = db.Column(db.Integer)
     qtd: int = db.Column(db.Integer)    
-    valor_venda: float = db.Column(db.Float)     
+    valor_venda: float = db.Column(db.Float) 
+
+class status_os(enum):
+    pendente=0
+    andamento=1
+    finalizado=2
+    cancelado=3
+    peca=4
+    cliente=5   
+    pagamento=6
+    retirada=7
+
     

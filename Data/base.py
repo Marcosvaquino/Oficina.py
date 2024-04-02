@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-host='177.234.148.10'
+host='187.33.241.16'
 user = 'prem0867_oficina'
 senha='ULr4Eu4tn8EtbCG'
 bd='prem0867_oficina'
