@@ -28,11 +28,12 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo do produto</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço produto</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço custo</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estoque</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo do produto</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço produto</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço custo</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estoque</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
                     <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
@@ -70,7 +71,7 @@
                         <div class=" d-flex px-2 py-1">
 
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
+                            <h6 class="mb-0 text-sm">{{produto.preco_custo}}</h6>
                           </div>
                         </div>
                       </td>
@@ -83,13 +84,16 @@
                         </div>
                       </td>
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                      {% if produto.tipo == 0 %}
+                        <td class="align-middle text-sm">
+                          <span class="badge badge-sm bg-gradient-success">Peça</span>
+                        </td>
+                      {% else %}
+                        <td class="align-middle text-sm">
+                          <span class="badge badge-sm bg-primary">Produto</span>
+                        </td>
+                      {% endif %}
+
                     </tr>
                   {% endfor%}
                 </tbody>

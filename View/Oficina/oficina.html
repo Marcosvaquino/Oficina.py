@@ -1,0 +1,101 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Lista de Usuarios {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link href="/static/assets/css/modal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-white text-capitalize ps-3">Cadastro Oficina</h6>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-3">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Grupo: Informações Gerais -->
+                <h4>ID</h4>
+                <input type="text" class="form-control mb-3" name="id" value={{oficina.id}} {% if oficina.id %}readonly{% endif %}>
+
+                <h4>CNPJ</h4>
+                <input type="text" class="form-control mb-3" name="cnpj" value={{oficina.cnpj}} {% if oficina.cnpj %}readonly{% endif %}>
+
+                <h4>Razão Social</h4>
+                <input type="text" class="form-control mb-3" name="razao_social" value={{oficina.razao_social}} {% if oficina.razao_social %}readonly{% endif %}>
+
+                <h4>Nome Fantasia</h4>
+                <input type="text" class="form-control mb-3" name="nome_fantasia" value={{oficina.nome_fantasia}} {% if oficina.nome_fantasia %}readonly{% endif %}>
+            </div>
+            <div class="col-md-6">
+                <!-- Grupo: Informações de Contato -->
+                <h4>Informações de Contato</h4>
+                <input type="text" class="form-control mb-3" name="logradouro" value={{oficina.logradouro}} {% if oficina.logradouro %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="numero" value={{oficina.numero}} {% if oficina.numero %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="bairro" value={{oficina.bairro}} {% if oficina.bairro %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="cidade" value={{oficina.cidade}} {% if oficina.cidade %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="uf" value={{oficina.uf}} {% if oficina.uf %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="cep" value={{oficina.cep}} {% if oficina.cep %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="telefone" value={{oficina.telefone}} {% if oficina.telefone %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="email" value={{oficina.email}} {% if oficina.email %}readonly{% endif %}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Grupo: Responsáveis e Contato Comercial -->
+                <h4>Responsáveis e Contato Comercial</h4>
+                <input type="text" class="form-control mb-3" name="nome_responsavel" value={{oficina.nome_responsavel}} {% if oficina.nome_responsavel %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="cargo_responsavel" value={{oficina.cargo_responsavel}} {% if oficina.cargo_responsavel %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="telefone_comercial" value={{oficina.telefone_comercial}} {% if oficina.telefone_comercial %}readonly{% endif %}>
+
+                <input type="text" class="form-control mb-3" name="email_comercial" value={{oficina.email_comercial}} {% if oficina.email_comercial %}readonly{% endif %}>
+            </div>
+            <div class="col-md-6">
+                <!-- Grupo: Informações Financeiras -->
+                <h4>Informações Financeiras</h4>
+                <input type="text" class="form-control mb-3" name="dados_bancarios" value={{oficina.dados_bancarios}} {% if oficina.dados_bancarios %}readonly{% endif %}>
+            </div>
+        </div>
+    </div>
+    <!-- Botão de Salvar -->
+<div class="fixed-bottom mb-4 me-4">
+    <button type="button" id="btnSalvar" class="btn btn-primary float-end">Salvar</button>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+  <!-- Inclua o script JavaScript aqui -->
+  {% include 'script.html' %}
+{% endblock scripts %}
+
+
+
+
+
+
+
+
+
