@@ -16,4 +16,8 @@ class OficinaBLL():
             return False
         
     def getOficina(id: int) -> Oficina:
-        return db.session.query(Oficina).filter_by(id=id).first() 
+        return db.session.query(Oficina).filter_by(id=id).first()
+    
+        # Listando todos os usuários cadastrados
+    def getListOficina() -> []:
+        return db.session.query(Oficina).all()

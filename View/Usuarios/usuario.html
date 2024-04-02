@@ -75,13 +75,15 @@
                         </div>
                       </td>
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{usuario.ativo}}</h6>
-                          </div>
-                        </div>
+                      {% if usuario.Ativo == 0 %}
+                      <td class="align-middle text-sm">
+                        <span class="badge badge-sm bg-gradient-danger">Inativo</span>
+                      </td>  
+                    {% else %}
+                      <td class="align-middle text-sm">
+                        <span class="badge badge-sm bg-gradient-success">Ativo</span>
                       </td>
+                    {% endif %}
                     </tr>
                   {% endfor%}
                 </tbody>
