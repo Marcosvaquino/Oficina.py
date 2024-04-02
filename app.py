@@ -9,6 +9,7 @@ from Routes.carro import carro
 from Routes.cliente import cliente
 from Routes.produto import produto
 from Routes.usuario import usuario
+from Routes.ordem import ordem
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
@@ -36,5 +37,6 @@ app.register_blueprint(cliente)
 app.register_blueprint(produto)
 app.register_blueprint(usuario)
 app.register_blueprint(index)
+app.register_blueprint(ordem)
 
 app.run(debug=True)
