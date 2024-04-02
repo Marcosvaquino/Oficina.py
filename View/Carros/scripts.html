@@ -1,32 +1,60 @@
 <script>
+  function openModalCarros(id) {
+    
+    var carros = JSON.parse('{{ carros | tojson | safe }}');
+    
+    function encontrarCarroPorId(carros, id) {
+      try{
+        for (var i = 0; i < carros.length; i++) {
+          if (carros[i].id == id) {
+            return carros[i];
+          }
+        }      
+        return null; 
+      }catch(e){
+        return null;
+      }
+    }
 
-    function openModal(id) {
+    function formatarData(d) {
+      try{
+        var dataSelecionada = new Date(d);
+        var dia = dataSelecionada.getDate().toString().padStart(2, '0');
+        var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
+        var ano = dataSelecionada.getFullYear();
+        var dataFormatada = dia + '/' + mes + '/' + ano;
+        return dataFormatada;
+      }catch(e){
+        return '';
+      }
+    }
+    
+    if (id == '0') {
+        document.getElementsByName('id')[0].value = '0';                      
+        document.getElementsByName('id_cliente')[0].value = '';
+        document.getElementsByName('id_oficina')[0].value = '';
+        
+        document.getElementsByName('placa')[0].value = '';
+        document.getElementsByName('modelo')[0].value = '';
+        document.getElementsByName('marca')[0].value = '';
+        document.getElementsByName('cor')[0].value = '';
+        document.getElementsByName('ano_fabricacao')[0].value = '';
+        document.getElementsByName('ano_modelo')[0].value = '';
+      
+        document.getElementsByName('data_cadastro')[0].value = '';
+        document.getElementsByName('data_atualizacao')[0].value = '';
+      document.getElementById('modalCarro').style.display = 'block';
+      return;
+    }else{
+      
+      var carroEncontrado = encontrarCarroPorId(carros, id);
+
+      if (carroEncontrado == null) {
+        alert('Carro não encontrado');
+        return;
+      }
 
       try{
-          
-        var carros = JSON.parse('{{ carros | tojson | safe }}');
-        
-        function encontrarCarroPorId(carros, id) {
-          for (var i = 0; i < carros.length; i++) {
-            if (carros[i].id == id) {
-              return carros[i];
-            }
-          }      
-          return null; // Retorna null se o carro não for encontrado
-        }
-
-        function formatarData(d) {
-          var dataSelecionada = new Date(d);
-          var dia = dataSelecionada.getDate().toString().padStart(2, '0');
-          var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
-          var ano = dataSelecionada.getFullYear();
-          var dataFormatada = dia + '/' + mes + '/' + ano;
-          return dataFormatada;
-        }
-      
-        // Exemplo de uso: encontrar um carro com ID 2
-        var carroEncontrado = encontrarCarroPorId(carros, id);
-
         document.getElementsByName('id')[0].value = carroEncontrado.id;
         document.getElementsByName('id_cliente')[0].value = carroEncontrado.id_cliente;
         document.getElementsByName('id_oficina')[0].value = carroEncontrado.id_oficina;
@@ -40,17 +68,16 @@
 
         document.getElementsByName('data_cadastro')[0].value = formatarData(carroEncontrado.data_criacao);
         document.getElementsByName('data_atualizacao')[0].value = formatarData(carroEncontrado.data_atualizacao);
+      }catch(e){
+        alert('Erro ao preencher os campos' + e);
+      }    
+      document.getElementById('modalCarro').style.display = 'block';
+    }
 
-        document.getElementById('modalCarro').style.display = 'block';
-      }
-      catch(err){
-        alert(err);
-      }
+  }
 
-      }
-
-    function closeModal() {
-        document.getElementById("modalCarro").style.display = "none";
-      }
+  function closeModalCarros() {
+    document.getElementById("modalCarro").style.display = "none";
+  }
 
 </script>
