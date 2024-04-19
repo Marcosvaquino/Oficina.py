@@ -14,7 +14,7 @@ class LoginForm(FlaskForm):
                              id='pwd_login',
                              validators=[DataRequired()])
     
-class CadastroCarro(FlaskForm): 
+class CadastroVeiculo(FlaskForm): 
          
         id = StringField('id',
                             id='id_create',
@@ -106,7 +106,7 @@ class CadastroServico(FlaskForm):
         id = StringField('id',id='id',validators=[DataRequired()])
         id_oficina = StringField('id_oficina',id='id_oficina',validators=[DataRequired()])
         SelecionarCliente = SelectField('Selecionar Cliente',id='SelecionarCliente',choices= ClienteBLL.gerListClientesSelect,validators=[DataRequired()])
-        SelecionarCarro = SelectField('Selecionar Carro',id='SelecionarCarro',validators=[DataRequired()])
+        SelecionarVeiculo = SelectField('Selecionar Veiculo',id='SelecionarVeiculo',validators=[DataRequired()])
         nome = StringField('Nome',id='nome',validators=[DataRequired()])
         descricao = StringField('Descrição',id='descricao',validators=[DataRequired()])
         valor = StringField('Valor',id='valor',validators=[DataRequired()])

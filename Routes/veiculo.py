@@ -1,33 +1,20 @@
 from flask import Blueprint, redirect,render_template,request, session,url_for
 from Model.veiculo import Veiculo
-from Model.ordem_servico import os
 from Controller.veiculoBLL import *
 
-ordem = Blueprint('ordem',__name__,template_folder="View")
+veiculo = Blueprint('veiculo',__name__,template_folder="View")
 
-@ordem.route('/ordem')
+@veiculo.route('/veiculo')
 def index_veiculo():
+    return render_template('Veiculos/veiculo.html',veiculos = VeiculoBLL.getListVeiculos(),pagina='Veiculos')
 
-    ordem= os()
-    ordem.id = 0
-    ordem.id_cliente = 0
-    ordem.id_veiculo = 0
-    ordem.id_oficina = 0
-    ordem.data_criacao= ''
-    ordem.data_atualizacao = ''
-    ordem.status = 1
-
-
-    return render_template('Ordens/os.html',pagina='Ordem de Serviço',os=ordem)
-
-@ordem.route('/ordem/cadastrar', methods=['POST'])
+@veiculo.route('/veiculo/cadastrar', methods=['POST'])
 def cadastrar():
 
     novo_veiculo = Veiculo()
 
     novo_veiculo.id = request.form['id']
     novo_veiculo.id_oficina = session['id_oficina']
-    novo_veiculo.id_cliente = request.form['id_cliente']
     novo_veiculo.placa = request.form['placa']
     novo_veiculo.modelo = request.form['modelo']
     novo_veiculo.marca = request.form['marca']
@@ -42,7 +29,7 @@ def cadastrar():
 
     return redirect(url_for('veiculo.index_veiculo'))
 
-@ordem.route('/ordem/consulta')
+@veiculo.route('/veiculo/consultar/<placa>')
 def consultar(placa):
     veiculo = VeiculoBLL.getVeiculo(placa)
 

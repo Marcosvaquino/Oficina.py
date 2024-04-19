@@ -16,7 +16,11 @@ class OficinaBLL():
             return False
         
     def getOficina(id: int) -> Oficina:
-        return db.session.query(Oficina).filter_by(id=id).first()
+        x=  db.session.query(Oficina).filter_by(id=id).first()
+
+        x.logradouro = x.logradouro.replace(' ','%20')
+
+        return x
     
         # Listando todos os usuários cadastrados
     def getListOficina() -> []:

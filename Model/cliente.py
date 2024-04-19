@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
-from Model.carro import Carro
-from Controller.carroBLL import CarroBLL
+from Model.veiculo import Veiculo
+from Controller.veiculoBLL import VeiculoBLL
 from typing import List
 from Data.base import db
 
@@ -24,6 +24,6 @@ class Cliente(db.Model):
     data_atualizacao:datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     status: int = db.Column(db.Integer, default=1)
 
-    def getCarros(self)->List[Carro]:
-        return CarroBLL.getCarrosCliente(self.id)
+    def getVeiculos(self)->List[Veiculo]:
+        return VeiculoBLL.getVeiculosCliente(self.id)
      

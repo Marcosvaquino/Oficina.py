@@ -1,165 +1,169 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Ordem de Serviço{% endblock %} 
+{% block title %} Ordem de Serviço{% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-  <link href="/static/assets/css/modal.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="/static/assets/css/modal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock stylesheets %}
 
 {% block content %}
-  <div class="container-fluid py-4">
+<div class="container-fluid py-4">
 
-    <div class="row">
+  <div class="row">
 
-      <div class="col-12">
-        
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+    <div class="col-12">
 
-             <div class = "row">
-                <div class="col-6">
-                    <p>Criada em: {{ os.data_criacao }}</p>
-                    <p>Atualizada em: {{ os.data_atualizacao }}</p>                    
-                </div>
-                <div class="col-6">
-                    <label for="status">Status O.S.</label>
-                    <input type="text" class="form-control" name="status" id="status">
-                    <button class="btn bg-gradient-primary" onclick="openModalItens('0')">Alterar Status</button>
-                </div>
-            </div>   
-          
-          </div>
-        </div>
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
 
-        <div class="row">
-
-            
-
-
-
-        </div>
-
-        <div class="card my-4">
-          <div class="card-body px-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtd</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">unitario</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">total</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">mecanico</th>
-                    <th class="text-secondary opacity-7"></th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  {% for produto in produtos %}
-
-                    <tr data-id="{{ produto.id}}">
-
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class=" d-flex px-2 py-1">
-
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  {% endfor%}
-                </tbody>
-              </table>
+          <div class="row">
+            <div class="col-6">
+              <p>Criada em: {{ os.data_criacao }}</p>
+              <p>Atualizada em: {{ os.data_atualizacao }}</p>
+            </div>
+            <div class="col-6">
+              <label for="status">Status O.S.</label>
+              <input type="text" class="form-control" name="status" id="status">
+              <button class="btn bg-gradient-primary" onclick="openModalItens('0')">Alterar Status</button>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-6">
-
-                <!--campo de texto para observacoes-->
-                <div class="form-group">
-                    <label for="observacoes">Observações</label>
-                    <textarea class="form-control" name="observacoes" id="observacoes" rows="7"></textarea>
-                </div>
-
-            </div>
-
-            <div class="col-6">
-
-                <!--campos de desconto, adicionais e valor total-->
-                <div class="form-group">
-                    <label for="desconto">Desconto</label>
-                    <input type="text" class="form-control" name="desconto" id="desconto">
-                    <label for="adicional">Adicional</label>
-                    <input type="text" class="form-control" name="adicional" id="adicional">
-                    <label for="adicional">Total</label>
-                    <input type="text" class="form-control" name="total" id="total">
-                </div>                   
-
-            </div>
-
 
         </div>
+      </div>
+
+      <div class="row">
+
+
+
+
+
+      </div>
+
+      <div class="card my-4">
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo
+                  </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição
+                  </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtd</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">unitario
+                  </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">total</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">mecanico
+                  </th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for produto in produtos %}
+
+                <tr data-id="{{ produto.id}}">
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class=" d-flex px-2 py-1">
+
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+
+          <!--campo de texto para observacoes-->
+          <div class="form-group">
+            <label for="observacoes">Observações</label>
+            <textarea class="form-control" name="observacoes" id="observacoes" rows="7"></textarea>
+          </div>
+
+        </div>
+
+        <div class="col-6">
+
+          <!--campos de desconto, adicionais e valor total-->
+          <div class="form-group">
+            <label for="desconto">Desconto</label>
+            <input type="text" class="form-control" name="desconto" id="desconto">
+            <label for="adicional">Adicional</label>
+            <input type="text" class="form-control" name="adicional" id="adicional">
+            <label for="adicional">Total</label>
+            <input type="text" class="form-control" name="total" id="total">
+          </div>
+
+        </div>
+
 
       </div>
 
     </div>
 
-    {% include 'Ordens/modal.html' %}
+  </div>
 
-  </div>    
+  {% include 'Ordens/modal.html' %}
+
+</div>
 
 
 {% endblock content %}
 
-{% block javascripts %}
+<!--{% block javascripts %}
 
 {% include 'Ordens/scripts.html' %}
 
-{% endblock javascripts %}
+{% endblock javascripts %}-->

@@ -1,0 +1,65 @@
+<div id="modalVeiculo" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModalVeiculos()">&times;</span>
+    <form action="/veiculo/cadastrar" method="post">
+      <fieldset>
+        <form>
+
+          <div class="form-row">
+
+            <input type="text" name="id" hidden>
+            <input type="text" name="id_cliente" hidden>
+            <input type="text" name="id_oficina" hidden>
+
+            <div class="form-group col-md-6">
+              <label for="placa">Placa:</label>
+              <input type="text" class="form-control" name="placa" required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="modelo">Modelo:</label>
+              <input type="text" class="form-control" name="modelo" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="marca">Marca:</label>
+              <input type="text" class="form-control" name="marca" required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="cor">Cor:</label>
+              <input type="text" class="form-control" name="cor" required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="ano_fabricacao">Ano Fabricação:</label>
+              <input type="text" class="form-control" name="ano_fabricacao" required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="ano_modelo">Ano Modelo:</label>
+              <input type="text" class="form-control" name="ano_modelo" required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="data_cadastro">Cadastrado em:</label>
+              <input type="text" class="form-control" name="data_cadastro" readonly>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="data_atualizacao">Atualizado em:</label>
+              <input type="text" class="form-control" name="data_atualizacao" readonly>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-success">Salvar</button>
+
+        </form>
+
+      </fieldset>
+    </form>
+  </div>
+</div>

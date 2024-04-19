@@ -6,11 +6,12 @@ from Data.base import connectionString, db
 from config import config_dict
 
 from Routes.index import index
-from Routes.carro import carro
+from Routes.veiculo import veiculo
 from Routes.cliente import cliente
 from Routes.produto import produto
 from Routes.usuario import usuario
 from Routes.ordem import ordem
+from Routes.oficina import oficina
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
@@ -33,7 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = connectionString()
 db.init_app(app)
 app.config.from_object(app_config)
 
-app.register_blueprint(carro)
+app.register_blueprint(veiculo)
 app.register_blueprint(cliente)
 app.register_blueprint(produto)
 app.register_blueprint(usuario)

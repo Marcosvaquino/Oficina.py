@@ -1,89 +1,89 @@
 <script>
-    function openModalItens(id) {
-      
-      var produto = JSON.parse('{{ produtos | tojson | safe }}');
-  
-      function encontrarProdutoPorId(produtos, id) {
-        try{
-          for(var i = 0; i < produtos.length; i++) {
-            if (produtos[i].id == id) {
-              return produtos[i];
-            }
+  function openModalItens(id) {
+
+    var produto = JSON.parse('{{ produtos | tojson | safe }}');
+
+    function encontrarProdutoPorId(produtos, id) {
+      try {
+        for (var i = 0; i < produtos.length; i++) {
+          if (produtos[i].id == id) {
+            return produtos[i];
           }
-          return null;
-        }catch(e){
-          return null;
         }
-      }
-  
-      function formatarData(d) {
-        try{
-          var dataSelecionada = new Date(d);
-            var dia = dataSelecionada.getDate().toString().padStart(2, '0');
-            var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
-            var ano = dataSelecionada.getFullYear();
-            var dataFormatada = dia + '/' + mes + '/' + ano;
-            return dataFormatada;
-          }catch(e){
-            return '';
-          }
-      }
-  
-      if (id === '0') {
-  
-        try{
-            document.getElementsByName('id')[0].value = '0';
-            document.getElementsByName('id_cliente')[0].value = '';
-            document.getElementsByName('id_oficina')[0].value = '';
-            
-            document.getElementsByName('codigo')[0].value = '';
-            document.getElementsByName('descricao')[0].value = '';
-            document.getElementsByName('preco')[0].value = '';
-            document.getElementsByName('preco_custo')[0].value = '';
-            document.getElementsByName('estoque')[0].value = '';
-          
-            //document.getElementsByName('data_cadastro')[0].value = '';
-            //document.getElementsByName('data_atualizacao')[0].value = '';
-  
-            document.getElementById('modalItens').style.display = 'block';
-  
-          return;
-        }catch(e){
-          alert('Error: '+ e)
-          return;
-        }
-  
-      }else{
-  
-          var produtoEncontrado = encontrarProdutoPorId(produto, id);
-  
-          if (produtoEncontrado == null) {
-            alert('Produto não encontrado');
-            return;
-          }
-  
-          try{
-            document.getElementsByName('id')[0].value = produtoEncontrado.id;
-            document.getElementsByName('id_cliente')[0].value = produtoEncontrado.id_cliente;
-            document.getElementsByName('id_oficina')[0].value = produtoEncontrado.id_oficina;
-            
-            document.getElementsByName('codigo')[0].value = produtoEncontrado.codigo;
-            document.getElementsByName('descricao')[0].value = produtoEncontrado.descricao;
-            document.getElementsByName('preco')[0].value = produtoEncontrado.preco;
-            document.getElementsByName('preco_custo')[0].value = produtoEncontrado.preco_custo;
-            document.getElementsByName('estoque')[0].value = produtoEncontrado.estoque;
-          
-            //document.getElementsByName('data_cadastro')[0].value = formatarData(carroEncontrado.data_criacao);
-            //document.getElementsByName('data_atualizacao')[0].value = formatarData(carroEncontrado.data_atualizacao);
-          }catch(e){
-            alert('Erro ao preencher os campos' + e);
-          }
-          document.getElementById('modalItens').style.display = 'block';
+        return null;
+      } catch (e) {
+        return null;
       }
     }
-  
-    function closeModalProdutos() {
-      document.getElementById("modalItens").style.display = "none";
+
+    function formatarData(d) {
+      try {
+        var dataSelecionada = new Date(d);
+        var dia = dataSelecionada.getDate().toString().padStart(2, '0');
+        var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
+        var ano = dataSelecionada.getFullYear();
+        var dataFormatada = dia + '/' + mes + '/' + ano;
+        return dataFormatada;
+      } catch (e) {
+        return '';
+      }
     }
-  
-  </script>
+
+    if (id === '0') {
+
+      try {
+        document.getElementsByName('id')[0].value = '0';
+        document.getElementsByName('id_cliente')[0].value = '';
+        document.getElementsByName('id_oficina')[0].value = '';
+
+        document.getElementsByName('codigo')[0].value = '';
+        document.getElementsByName('descricao')[0].value = '';
+        document.getElementsByName('preco')[0].value = '';
+        document.getElementsByName('preco_custo')[0].value = '';
+        document.getElementsByName('estoque')[0].value = '';
+
+        //document.getElementsByName('data_cadastro')[0].value = '';
+        //document.getElementsByName('data_atualizacao')[0].value = '';
+
+        document.getElementById('modalItens').style.display = 'block';
+
+        return;
+      } catch (e) {
+        alert('Error: ' + e)
+        return;
+      }
+
+    } else {
+
+      var produtoEncontrado = encontrarProdutoPorId(produto, id);
+
+      if (produtoEncontrado == null) {
+        alert('Produto não encontrado');
+        return;
+      }
+
+      try {
+        document.getElementsByName('id')[0].value = produtoEncontrado.id;
+        document.getElementsByName('id_cliente')[0].value = produtoEncontrado.id_cliente;
+        document.getElementsByName('id_oficina')[0].value = produtoEncontrado.id_oficina;
+
+        document.getElementsByName('codigo')[0].value = produtoEncontrado.codigo;
+        document.getElementsByName('descricao')[0].value = produtoEncontrado.descricao;
+        document.getElementsByName('preco')[0].value = produtoEncontrado.preco;
+        document.getElementsByName('preco_custo')[0].value = produtoEncontrado.preco_custo;
+        document.getElementsByName('estoque')[0].value = produtoEncontrado.estoque;
+
+        //document.getElementsByName('data_cadastro')[0].value = formatarData(veiculoEncontrado.data_criacao);
+        //document.getElementsByName('data_atualizacao')[0].value = formatarData(veiculoEncontrado.data_atualizacao);
+      } catch (e) {
+        alert('Erro ao preencher os campos' + e);
+      }
+      document.getElementById('modalItens').style.display = 'block';
+    }
+  }
+
+  function closeModalProdutos() {
+    document.getElementById("modalItens").style.display = "none";
+  }
+
+</script>

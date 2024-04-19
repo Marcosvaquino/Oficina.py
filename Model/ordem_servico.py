@@ -16,7 +16,7 @@ class status_os(enum.Enum):
 @dataclass
 class os(db.Model):
     id: int = db.Column(db.Integer, primary_key=True)
-    id_carro: int = db.Column(db.Integer)
+    id_veiculo: int = db.Column(db.Integer)
     id_cliente: int = db.Column(db.Integer)
     id_oficina: int = db.Column(db.Integer) 
     id_usuario: int = db.Column(db.Integer)
