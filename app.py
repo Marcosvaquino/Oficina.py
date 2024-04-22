@@ -26,10 +26,11 @@ try:
 except KeyError:
     exit('Error: Invalid <config_mode>. Expected values [Debug, Production] ')
 
-
-
 app = Flask(__name__,template_folder="View")
 app.config['SQLALCHEMY_DATABASE_URI'] = connectionString()
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True
+}
 
 db.init_app(app)
 app.config.from_object(app_config)
