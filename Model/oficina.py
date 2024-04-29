@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from enum import Enum
 from Data.base import db
 
 @dataclass
@@ -22,10 +23,14 @@ class Oficina(db.Model):
     nome_responsavel: str  = db.Column(db.String)
     cargo_responsavel: str  = db.Column(db.String)
     telefone_comercial: int = db.Column(db.Integer)
-    email_comercial: str  = db.Column(db.String)
+    
+    tipo_veiculo: str  = db.Column(db.Integer)
 
-    # Informações Financeiras:
-    dados_bancarios: str  = db.Column(db.String)
-
+class TipoVeiculo(Enum):
+    carro = 0
+    moto = 1
+    caminhao = 2
+    
+    
 
    

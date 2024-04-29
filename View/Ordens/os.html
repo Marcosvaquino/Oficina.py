@@ -1,169 +1,134 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Ordem de Serviço{% endblock %}
+{% block title %} Ordem de Serviço {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-<link href="/static/assets/css/modal.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock stylesheets %}
 
 {% block content %}
+
 <div class="container-fluid py-4">
 
-  <div class="row">
+  <form role="form" method="post" action="/ordem/cadastrar/{{os.id}}">
 
-    <div class="col-12">
+    {{ form.hidden_tag() }}
 
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+    {{ form.id(class="form-control", id="os_id", value=os.id) }}
+    {{ form.id_cliente(class="form-control", id="cliente_id", value=cliente.id) }}
+    {{ form.id_veiculo(class="form-control", id="veiculo_id", value=veiculo.id) }}
 
-          <div class="row">
-            <div class="col-6">
-              <p>Criada em: {{ os.data_criacao }}</p>
-              <p>Atualizada em: {{ os.data_atualizacao }}</p>
-            </div>
-            <div class="col-6">
-              <label for="status">Status O.S.</label>
-              <input type="text" class="form-control" name="status" id="status">
-              <button class="btn bg-gradient-primary" onclick="openModalItens('0')">Alterar Status</button>
-            </div>
+    <div class="row">
+
+      <div class="col-md-6">
+
+        {{ form.placa.label }}
+        <div class="input-group">
+          {{ form.placa(class="form-control", id="placa", autocomplete="on",value=veiculo.placa) }}
+          <div class="input-group-append" id="buttons">
+            <button class="btn btn-outline-secondary" type="button"
+              onclick="buscarVeiculoPorPlaca(document.getElementById('placa').value)">Localizar</button>
+            <button class="btn btn-outline-primary" type="button">Novo</button>
           </div>
-
         </div>
-      </div>
-
-      <div class="row">
-
-
-
-
 
       </div>
 
-      <div class="card my-4">
-        <div class="card-body px-0 pb-2">
-          <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
-              <thead>
-                <tr>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtd</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">unitario
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">total</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">mecanico
-                  </th>
-                  <th class="text-secondary opacity-7"></th>
-                </tr>
-              </thead>
-              <tbody>
-
-                {% for produto in produtos %}
-
-                <tr data-id="{{ produto.id}}">
-
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class=" d-flex px-2 py-1">
-
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.precoCusto}}</h6>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{produto.tipo}}</h6>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                {% endfor%}
-              </tbody>
-            </table>
-          </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          {{ form.modelo.label}}
+          {{ form.modelo(class="form-control mb-3", id="modelo",value=veiculo.modelo) }}
         </div>
       </div>
 
-      <div class="row">
-
-        <div class="col-6">
-
-          <!--campo de texto para observacoes-->
-          <div class="form-group">
-            <label for="observacoes">Observações</label>
-            <textarea class="form-control" name="observacoes" id="observacoes" rows="7"></textarea>
-          </div>
-
+      <div class="col-md-2">
+        <div class="form-group">
+          {{ form.ano.label}}
+          {{ form.ano(class="form-control mb-3", id="ano",value=veiculo.ano) }}
         </div>
+      </div>
 
-        <div class="col-6">
-
-          <!--campos de desconto, adicionais e valor total-->
-          <div class="form-group">
-            <label for="desconto">Desconto</label>
-            <input type="text" class="form-control" name="desconto" id="desconto">
-            <label for="adicional">Adicional</label>
-            <input type="text" class="form-control" name="adicional" id="adicional">
-            <label for="adicional">Total</label>
-            <input type="text" class="form-control" name="total" id="total">
-          </div>
-
+      <div class="col-md-2">
+        <div class="form-group">
+          {{ form.quilometragem.label}}
+          {{ form.quilometragem(class="form-control mb-3", id="quilometragem",value=os.quilometragem) }}
         </div>
-
-
       </div>
 
     </div>
 
-  </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          {{ form.nome.label}}
+          {{ form.nome(class="form-control mb-3", id="nome", value= cliente.nome) }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          {{ form.fone.label}}
+          {{ form.fone(class="form-control mb-3", id="fone", value= cliente.fone) }}
+        </div>
+      </div>
+    </div>
 
-  {% include 'Ordens/modal.html' %}
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          {{ form.data_entrada.label}}
+          {{ form.data_entrada(class="form-control mb-3", id="data_entrada",value=os.data_entrada) }}
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          {{ form.data_previsao.label}}
+          {{ form.data_previsao(class="form-control mb-3", id="data_previsao",value=os.data_previsao) }}
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          {{ form.tipo_servico.label}}
+          {{ form.tipo_servico(class="form-control mb-3", id="tipo_servico",value=os.tipo_servico) }}
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          {{ form.prioridade.label}}
+          {{ form.prioridade(class="form-control mb-3", id="prioridade",value=os.prioridade) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.descricao.label}}
+          {{ form.descricao(class="form-control", id="descricao",value=os.descricao) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.salvar(class="btn btn-primary") }}
+        </div>
+      </div>
+    </div>
+
 
 </div>
 
+</form>
+
+</div>
 
 {% endblock content %}
 
-<!--{% block javascripts %}
+{% block javascripts %}
 
 {% include 'Ordens/scripts.html' %}
 
-{% endblock javascripts %}-->
+{% endblock javascripts %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect,render_template,request, session,url_for
+from flask import Blueprint, jsonify, redirect,render_template,request, session,url_for
 from Model.veiculo import Veiculo
 from Controller.veiculoBLL import *
 
@@ -33,4 +33,26 @@ def cadastrar():
 def consultar(placa):
     veiculo = VeiculoBLL.getVeiculo(placa)
 
-    return render_template('consulta.html')
+    if veiculo:
+        return jsonify(veiculo)
+    else:
+        return None
+    
+@veiculo.route('/placa/autocomplete')
+def placa_autocomplete():
+    
+  veiculos = VeiculoBLL.getListVeiculos()
+    
+  placas = [{'placa': v.placa} for v in veiculos]
+  
+  return jsonify(placas)
+
+@veiculo.route('/placa/<string:placa>')
+def busca_veiculo_por_placa(placa):
+  veiculo = Veiculo.query.filter_by(placa=placa).first()
+
+  if veiculo:
+    return jsonify(veiculo)
+  else:
+    return jsonify({'mensagem': 'Veículo não encontrado'}), 404
+   

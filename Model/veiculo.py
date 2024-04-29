@@ -6,6 +6,7 @@ from Data.base import db
 class Veiculo(db.Model):
     id:int = db.Column(db.Integer, primary_key=True)
     id_oficina:int = db.Column(db.Integer)
+    id_cliente:int = db.Column(db.Integer)
     placa: str = db.Column(db.String(7))
     modelo:str = db.Column(db.String(50))
     marca:str = db.Column(db.String(50))
@@ -17,7 +18,7 @@ class Veiculo(db.Model):
     data_criacao:datetime = db.Column(db.DateTime, default=datetime.now)
     data_atualizacao:datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     combustivel:str = db.Column(db.Integer)
-    chassis:str = db.Column(db.String(45))
+    chassi:str = db.Column(db.String(45))
     renavam:str = db.Column(db.String(45))
     numero_motor:str = db.Column(db.String(45))
     potencia:str = db.Column(db.String(45))

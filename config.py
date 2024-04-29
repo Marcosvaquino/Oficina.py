@@ -15,14 +15,19 @@ class Config(object):
     
 class ProductionConfig(Config):
     DEBUG = False
-
     # Security
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
+    PERMANENT_SESSION_LIFETIME = 3600
 
 class DebugConfig(Config):
     DEBUG = True
+    #Security
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_DURATION = 3600
+    PERMANENT_SESSION_LIFETIME = 3600
 
 
 # Load all possible configurations

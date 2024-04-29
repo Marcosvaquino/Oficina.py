@@ -1,4 +1,5 @@
 <script>
+
   function openModalVeiculos(id) {
 
     var veiculos = JSON.parse('{{ veiculos | tojson | safe }}');
@@ -77,5 +78,7 @@
   function closeModalVeiculos() {
     document.getElementById("modalVeiculo").style.display = "none";
   }
+
+
 
 </script>

@@ -2,7 +2,6 @@ import os
 from flask import Flask
 from Data.base import connectionString, db
 
-
 from config import config_dict
 
 from Routes.index import index

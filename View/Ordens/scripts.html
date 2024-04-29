@@ -1,89 +1,96 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 <script>
-  function openModalItens(id) {
 
-    var produto = JSON.parse('{{ produtos | tojson | safe }}');
+  $(document).ready(function () {
 
-    function encontrarProdutoPorId(produtos, id) {
-      try {
-        for (var i = 0; i < produtos.length; i++) {
-          if (produtos[i].id == id) {
-            return produtos[i];
-          }
+    var nomes = [];
+    var placas = [];
+
+    function buscarPlacas() {
+      $.getJSON('/placa/autocomplete', function (data, status, xhr) {
+        for (var i = 0; i < data.length; i++) {
+          placas.push(data[i].placa);
         }
-        return null;
-      } catch (e) {
-        return null;
+      });
+    };
+
+    function buscarNomes() {
+      $.getJSON('/cliente/autocomplete', function (data, status, xhr) {
+        for (var i = 0; i < data.length; i++) {
+          nomes.push(data[i].nome);
+        }
+      });
+    };
+
+    buscarPlacas();
+
+    buscarNomes();
+
+    $("#placa").autocomplete({
+      source: placas,
+      select: function (event, ui) {
+        buscarVeiculoPorPlaca(ui.item.value);
       }
-    }
+    });
 
-    function formatarData(d) {
-      try {
-        var dataSelecionada = new Date(d);
-        var dia = dataSelecionada.getDate().toString().padStart(2, '0');
-        var mes = (dataSelecionada.getMonth() + 1).toString().padStart(2, '0');
-        var ano = dataSelecionada.getFullYear();
-        var dataFormatada = dia + '/' + mes + '/' + ano;
-        return dataFormatada;
-      } catch (e) {
-        return '';
-      }
-    }
+    $("#nome").autocomplete({
+      source: nomes,
+    });
 
-    if (id === '0') {
+  });
 
-      try {
-        document.getElementsByName('id')[0].value = '0';
-        document.getElementsByName('id_cliente')[0].value = '';
-        document.getElementsByName('id_oficina')[0].value = '';
+  function buscarVeiculoPorPlaca(placa) {
+    fetch('/placa/' + placa)
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          document.getElementById('id_veiculo').value = data.id;
+          document.getElementById('modelo').value = data.marca + '/' + data.modelo;
+          document.getElementById('ano').value = data.ano_fabricacao + '/' + data.ano_modelo;
 
-        document.getElementsByName('codigo')[0].value = '';
-        document.getElementsByName('descricao')[0].value = '';
-        document.getElementsByName('preco')[0].value = '';
-        document.getElementsByName('preco_custo')[0].value = '';
-        document.getElementsByName('estoque')[0].value = '';
+          if (data.id_cliente && typeof data.id_cliente === 'number' && data.id_cliente > 0) {
+            buscarClientePorId(data.id_cliente);
+          }
 
-        //document.getElementsByName('data_cadastro')[0].value = '';
-        //document.getElementsByName('data_atualizacao')[0].value = '';
-
-        document.getElementById('modalItens').style.display = 'block';
-
-        return;
-      } catch (e) {
-        alert('Error: ' + e)
-        return;
-      }
-
-    } else {
-
-      var produtoEncontrado = encontrarProdutoPorId(produto, id);
-
-      if (produtoEncontrado == null) {
-        alert('Produto não encontrado');
-        return;
-      }
-
-      try {
-        document.getElementsByName('id')[0].value = produtoEncontrado.id;
-        document.getElementsByName('id_cliente')[0].value = produtoEncontrado.id_cliente;
-        document.getElementsByName('id_oficina')[0].value = produtoEncontrado.id_oficina;
-
-        document.getElementsByName('codigo')[0].value = produtoEncontrado.codigo;
-        document.getElementsByName('descricao')[0].value = produtoEncontrado.descricao;
-        document.getElementsByName('preco')[0].value = produtoEncontrado.preco;
-        document.getElementsByName('preco_custo')[0].value = produtoEncontrado.preco_custo;
-        document.getElementsByName('estoque')[0].value = produtoEncontrado.estoque;
-
-        //document.getElementsByName('data_cadastro')[0].value = formatarData(veiculoEncontrado.data_criacao);
-        //document.getElementsByName('data_atualizacao')[0].value = formatarData(veiculoEncontrado.data_atualizacao);
-      } catch (e) {
-        alert('Erro ao preencher os campos' + e);
-      }
-      document.getElementById('modalItens').style.display = 'block';
-    }
+        } else {
+          alert('Veículo não encontrado!');
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar veículo:', error);
+      });
+    desabilitarCamposVeiculo(false);
   }
 
-  function closeModalProdutos() {
-    document.getElementById("modalItens").style.display = "none";
+  function buscarClientePorId(idCliente) {
+    fetch('/cliente/' + idCliente)
+      .then(response => response.json())
+      .then(cliente => {
+        if (cliente) {
+          document.getElementById('id_cliente').value = cliente.id;
+          document.getElementById('nome').value = cliente.nome;
+          document.getElementById('fone').value = cliente.fone;
+        } else {
+          console.error('Cliente não encontrado:', idCliente);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar cliente:', error);
+      });
+    desabilitarCamposCliente(true);
+  }
+
+  function desabilitarCamposCliente(habilitado = true) {
+    document.getElementById('nome').disabled = habilitado;
+    document.getElementById('fone').disabled = habilitado;
+  }
+
+  function desabilitarCamposVeiculo(habilitado = true) {
+    document.getElementById('modelo').disabled = habilitado;
+    document.getElementById('ano').disabled = habilitado;
+    document.getElementById('quilometragem').disabled = habilitado;
   }
 
 </script>

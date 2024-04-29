@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect,render_template,request, session,url_for
+from flask import Blueprint, jsonify, redirect,render_template,request, session,url_for
 from Model.cliente import Cliente
 from Controller.clienteBLL import ClienteBLL
 from Controller.form import CadastroCliente
@@ -34,4 +34,23 @@ def cadastrar():
         ClienteBLL.updateCliente(novo_cliente)
    
     return redirect(url_for('cliente.index_cliente'))
+
+@cliente.route('/cliente/<int:cliente_id>')
+def localizarCliente(cliente_id):
+
+  cliente = ClienteBLL.getClienteId(cliente_id)
+
+  if cliente:
+    return jsonify(cliente)
+  else:
+    return jsonify({'fone': None})
+  
+@cliente.route('/cliente/autocomplete')
+def nome_autocomplete():
+    
+  clientes = ClienteBLL.getListClientes()
+
+  nomes = [{'nome': c.nome} for c in clientes]
+
+  return jsonify(nomes)
 

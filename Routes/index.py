@@ -1,4 +1,5 @@
 from flask import Blueprint,  render_template,request,redirect,url_for,session
+from Controller.ordemServicoBLL import OrdemServicoBLL
 from Controller.usuarioBLL import UsuarioBLL
 from Controller.oficinaBLL import OficinaBLL
 from Model.usuario import Usuario
@@ -23,6 +24,7 @@ def getLogin():
         if logado:
            session['username'] = username
            session['id_oficina'] = logado.id_oficina
+           session['id_usuario'] = logado.id
 
            return redirect(url_for('index.getIndex'))
 
@@ -37,7 +39,7 @@ def getLogin():
 @index.route('/index', methods=['GET'])
 def getIndex():
     if session.get('username'):       
-        return render_template('index.html', segment='index')
+        return render_template('index.html',ordens= OrdemServicoBLL.getOrdensServico(),  segment='index')
     else:
         return redirect(url_for('index.getLogin')) 
 
@@ -47,7 +49,6 @@ def getIndex():
 def register():
 
     create_account_form = CadastroOficina(request.form)
-
    
     if 'register' in request.form:
 

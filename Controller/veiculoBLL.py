@@ -16,10 +16,17 @@ class VeiculoBLL():
     #localizando o veiculo na lista de veiculos
     def getVeiculo(placa:str)->Veiculo:
         return Veiculo.query.filter_by(placa=placa).first()
-
-    def getVeiculosCliente(id:int)->list:
-        return Veiculo.query.filter_by(id_cliente=id).all()         
     
+    def getVeiculoId(id:int)->Veiculo:
+        return Veiculo.query.filter_by(id=id).first()
+   
     #listando todos os veiculos cadastrados
     def getListVeiculos()->list:
-        return Veiculo.query.filter_by(id_oficina=session['id_oficina']).all()        
+        return Veiculo.query.filter_by(id_oficina=session['id_oficina']).all()
+
+    def getListVeiculosSelect():
+        veiculos = Veiculo.query.filter_by(id_oficina=session['id_oficina']).all()
+        lista = []
+        for veiculo in veiculos:
+            lista.append((veiculo.id,veiculo.placa))
+        return lista   

@@ -1,8 +1,12 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField,SelectField
+from wtforms import DateField, HiddenField, StringField, PasswordField,SelectField, SubmitField, TextAreaField
 from wtforms.validators import Email, DataRequired
 
+
 from Controller.clienteBLL import ClienteBLL
+from Controller.veiculoBLL import VeiculoBLL
+
 
 class LoginForm(FlaskForm):
 
@@ -103,14 +107,33 @@ class CadastroCliente(FlaskForm):
 
 class CadastroServico(FlaskForm):
          
-        id = StringField('id',id='id',validators=[DataRequired()])
-        id_oficina = StringField('id_oficina',id='id_oficina',validators=[DataRequired()])
-        SelecionarCliente = SelectField('Selecionar Cliente',id='SelecionarCliente',choices= ClienteBLL.gerListClientesSelect,validators=[DataRequired()])
-        SelecionarVeiculo = SelectField('Selecionar Veiculo',id='SelecionarVeiculo',validators=[DataRequired()])
-        nome = StringField('Nome',id='nome',validators=[DataRequired()])
-        descricao = StringField('Descrição',id='descricao',validators=[DataRequired()])
-        valor = StringField('Valor',id='valor',validators=[DataRequired()])
-        observacao = StringField('Observação',id='observacao',validators=[DataRequired()])
-        data_criacao = StringField('Data de Criação',id='data_criacao',validators=[DataRequired()])
-        data_atualizacao = StringField('Data de Atualização',id='data_atualizacao',validators=[DataRequired()])
+        id = HiddenField('id',id='id',validators=[DataRequired()])
+
+        id_cliente = HiddenField('id_cliente',id='id_cliente',validators=[DataRequired()])
+        id_veiculo = HiddenField('id_veiculo',id='id_veiculo',validators=[DataRequired()])
+        
+        fone = StringField('Contato Cliente*',id='fone', validators=[DataRequired()])
+        nome = StringField('Nome*',id='nome',render_kw={"autocomplete": "on"}, validators=[DataRequired()])
+
+        placa = StringField('Placa*',id='placa',render_kw={"autocomplete": "on"},validators=[DataRequired()])
+        modelo = StringField('Modelo*',id='modelo',validators=[DataRequired()])
+        ano = StringField('Ano*',id='ano',validators=[DataRequired()])
+
+        data_entrada = DateField('Data de Entrada',id='data_entrada',default='',validators=[DataRequired()])
+        data_previsao = DateField('Previsão de Entrega',id='data_previsao',default='',validators=[DataRequired()])
+
+        tipo_servico = SelectField('Tipo de Serviço',id='tipo_servico',choices=[('1','Revisão'),('2','Troca de Óleo'),('3','Troca de Pneu'),('4','Troca de Bateria')],validators=[DataRequired()])
+        prioridade = SelectField('Prioridade',id='prioridade',choices=[('1','Baixa'),('2','Média'),('3','Alta')],validators=[DataRequired()])
+        status = SelectField('Status',id='status',choices=[('1','Em andamento'),('2','Finalizado')],validators=[DataRequired()])
+        quilometragem = StringField('Quilometragem',id='quilometragem',validators=[DataRequired()])
+
+        descricao = TextAreaField('Descrição',id='descricao')
+        valor = StringField('Valor',id='valor')
+        
+        data_criacao = StringField('Data de Criação',id='data_criacao')
+        data_atualizacao = StringField('Data de Atualização',id='data_atualizacao')
+
+        salvar = SubmitField('Salvar')
+
+
 
