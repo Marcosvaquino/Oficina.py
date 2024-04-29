@@ -1,0 +1,92 @@
+<button class="btn btn-primary" onclick="openModalItens('0')">Adicionar Itens</button>
+{% if itens|length > 0 %}
+<div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">unitario</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtd</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for item in itens %}
+
+            <tr data-id="{{ item.id}}">
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.produto().codigo}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.produto().nome_produto}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.valor_unitario}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.usuario().nome}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.qtd}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.tipo}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{item.total}}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <button class="btn btn-primary" onclick="openModalItens('{{item.id}}')">Editar</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <button class="btn btn-danger" onclick="removerItem('{{item.id}}')">Remover</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}

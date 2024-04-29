@@ -1,52 +1,57 @@
 <div id="modalItens" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModalItens()">&times;</span>
-            <form action="/produto/cadastrar" method="post">
+        <form action="/ordem/item" method="post">
             <fieldset>
-                <form>
 
-                    <div class="form-row">
+                <div class="form-row">
 
-                        <input type="text" name="id" hidden>
-                        <input type="text" name="id_cliente" hidden>
-                        <input type="text" name="id_oficina" hidden>
+                    {{ formItem.hidden_tag() }}
 
-                        <div class="form-group col-md-6">
-                            <label for="codigo">Codigo</label>
-                            <input type="text" class="form-control" name="codigo" required>
-                        </div>
+                    {{ formItem.id_item(class="form-control", id="id", value=os.id) }}
+                    {{ formItem.id_ordem_servico(class="form-control", id="id_ordem_servico", value=os.id) }}
+                    {{ formItem.id_produto(class="form-control", id="id_produto", value=os.id) }}
 
-                        <div class="form-group col-md-6">
-                            <label for="descricao">Descricao</label>
-                            <input type="text" class="form-control" name="descricao" required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="preco">Preço</label>
-                            <input type="text" class="form-control" name="preco" required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="precoCusto">Preço de Custo</label>
-                            <input type="text" class="form-control" name="preco_custo" required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="estoque">Estoque</label>
-                            <input type="text" class="form-control" name="estoque" required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="tipo">tipo [produto ou serviço]</label>
-                            <input type="text" class="form-control" name="tipo" required>
-                        </div>
-
+                    <div class="form-group col-md-6">
+                        {{ formItem.codigo.label }}
+                        {{ formItem.codigo(class="form-control", id="codigo", value='') }}
                     </div>
 
-                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <div class="form-group col-md-6">
+                        {{ formItem.nome_produto.label }}
+                        {{ formItem.nome_produto(class="form-control", id="nome_produto", value='') }}
+                    </div>
 
-                </form>
+                    <div class="form-group col-md-6">
+                        {{ formItem.valor_unitario.label }}
+                        {{ formItem.valor_unitario(class="form-control", id="valor_unitario", value=0) }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ formItem.qtd.label }}
+                        {{ formItem.qtd(class="form-control", id="qtd", value=1) }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ formItem.desconto.label }}
+                        {{ formItem.desconto(class="form-control", id="desconto", value=0) }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ formItem.acrescimo.label }}
+                        {{ formItem.acrescimo(class="form-control", id="acrescimo", value=0) }}
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        {{ formItem.descricao.label }}
+                        {{ formItem.descricao(class="form-control", id="descricao", value='') }}
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">Salvar</button>
+
             </fieldset>
-            </form>
+        </form>
     </div>
 </div>

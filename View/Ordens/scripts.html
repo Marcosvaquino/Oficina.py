@@ -93,4 +93,86 @@
     document.getElementById('quilometragem').disabled = habilitado;
   }
 
+  function openModalItens(id) {
+
+    function encontrarItemPorId(id) {
+      try {
+
+        var itens = JSON.parse('{{ itens | tojson | safe }}');
+
+        for (var i = 0; i < produtos.length; i++) {
+          if (produtos[i].id == id) {
+            return produtos[i];
+          }
+        }
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    if (id === '0') {
+
+      try {
+
+        document.getElementsByName('id_item')[0].value = 0;
+        document.getElementsByName('id_ordem_servico')[0].value = '';
+        document.getElementsByName('id_produto')[0].value = 0;
+        document.getElementsByName('id_usuario')[0].value = 0;
+        document.getElementsByName('codigo')[0].value = '';
+        document.getElementsByName('nome_produto')[0].value = '';
+        document.getElementsByName('valor_unitario')[0].value = 0;
+        document.getElementsByName('qtd')[0].value = 1;
+        document.getElementsByName('desconto')[0].value = 0;
+        document.getElementsByName('acrescimo')[0].value = 0;
+        document.getElementsByName('descricao')[0].value = '';
+
+        document.getElementById('modalItens').style.display = 'block';
+
+        return;
+      } catch (e) {
+        alert('Error: ' + e)
+        return;
+      }
+
+    } else {
+
+      var itemEncontrado = encontrarItemPorId(id);
+
+      if (itemEncontrado == null) {
+        alert('Item não encontrado');
+        return;
+      }
+
+      try {
+
+        document.getElementsByName('id_item')[0].value = itemEncontrado.id;
+        document.getElementsByName('id_ordem_servico')[0].value = itemEncontrado.id_ordem_servico;
+        document.getElementsByName('id_produto')[0].value = itemEncontrado.id_produto;
+        document.getElementsByName('id_usuario')[0].value = itemEncontrado.id_usuario;
+        document.getElementsByName('codigo')[0].value = itemEncontrado.produto().codigo;
+        document.getElementsByName('nome_produto')[0].value = itemEncontrado.produto().nome_produto;
+        document.getElementsByName('valor_unitario')[0].value = itemEncontrado.valor_unitario;
+        document.getElementsByName('qtd')[0].value = itemEncontrado.qtd;
+        document.getElementsByName('desconto')[0].value = itemEncontrado.desconto;
+        document.getElementsByName('acrescimo')[0].value = itemEncontrado.acrescimo;
+        document.getElementsByName('descricao')[0].value = itemEncontrado.observacao;
+
+      } catch (e) {
+        alert('Erro ao preencher os campos' + e);
+      }
+      document.getElementById('modalItens').style.display = 'block';
+    }
+  }
+
+  function closeModalItens() {
+    document.getElementById("modalItens").style.display = "none";
+  }
+
+  function removerItem(id) {
+    if (confirm('Deseja realmente remover este item?')) {
+      window.location.href = '/ordem/remover/' + id;
+    }
+  }
+
 </script>

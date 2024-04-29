@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from Data.base import db
 from Model.cliente import Cliente
+from Model.item_servico import ItemServico
 from Model.usuario import Usuario
 from Model.veiculo import Veiculo
 
@@ -72,13 +73,7 @@ class OrdemServico(db.Model):
     def prioridadeOs(self):
         return Prioridade(self.prioridade)
     def itens(self):
-        return ItemOrdemServico.query.filter_by(id_os=self.id).all()
+        return ItemServico.query.filter_by(id_ordem_servico=self.id).all()
     def valor_total(self):
         return self.valor_pecas + self.valor_servicos + self.valor_acrescimo - self.valor_desconto
-
-class ItemOrdemServico(db.Model):
-    id: int = db.Column(db.Integer, primary_key=True)
-    id_os: int = db.Column(db.Integer)
-    id_produto: int = db.Column(db.Integer)
-    qtd: int = db.Column(db.Integer)    
-    valor_venda: float = db.Column(db.Float)    
+    

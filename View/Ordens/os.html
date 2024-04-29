@@ -4,6 +4,7 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
+<link href="/static/assets/css/modal.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock stylesheets %}
@@ -78,7 +79,7 @@
       <div class="col-md-3">
         <div class="form-group">
           {{ form.data_entrada.label}}
-          {{ form.data_entrada(class="form-control mb-3", id="data_entrada",value=os.data_entrada) }}
+          {{ form.data_entrada(class="form-control mb-3", id="data_entrada",value="29/04/2024") }}
         </div>
       </div>
       <div class="col-md-3">
@@ -122,6 +123,10 @@
 </div>
 
 </form>
+
+{% include 'Ordens/itens.html' %}
+
+{% include 'Ordens/modal.html' %}
 
 </div>
 

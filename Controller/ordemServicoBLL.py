@@ -14,6 +14,10 @@ class OrdemServicoBLL():
     def getOrdemServico(id):
         return db.session.query(OrdemServico).get(id)
     
+    def setItemServico(item):
+        db.session.add(item)
+        db.session.commit()
+    
     def setOrdemServico(ordem:OrdemServico)->int:
 
         id_veiculo = ordem.id_veiculo

@@ -1,3 +1,4 @@
+from flask import session
 from Model.usuario import Usuario,db
 
 class UsuarioBLL():
@@ -15,5 +16,8 @@ class UsuarioBLL():
         return db.session.query(Usuario).filter_by(id=id).first()              
 
     # Listando todos os usuários cadastrados
-    def getListUsuarios() -> []:
+    def getListUsuarios():
         return db.session.query(Usuario).all()
+
+    def getListUsuariosOficina():
+        return db.session.query(Usuario).filter_by(id_oficina=session['id_oficina']).all()

@@ -3,10 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import DateField, HiddenField, StringField, PasswordField,SelectField, SubmitField, TextAreaField
 from wtforms.validators import Email, DataRequired
 
-
-from Controller.clienteBLL import ClienteBLL
-from Controller.veiculoBLL import VeiculoBLL
-
+from Model.ordem_servico import StatusOs, TipoServico, Prioridade
 
 class LoginForm(FlaskForm):
 
@@ -90,7 +87,7 @@ class CadastroOficina(FlaskForm):
     telefone = StringField('Telefone',id='telefone',validators=[DataRequired()])
 
     nome_responsavel = StringField('Nome Responsável',id='nome_responsavel',validators=[DataRequired()])
-class CadastroCliente(FlaskForm):
+class FormCliente(FlaskForm):
 
     fone = StringField('Telefone',id='fone',validators=[DataRequired()])
     cpf_cnpj = StringField('CPF ou CNPJ',id='cpf_cnpj',validators=[DataRequired()])
@@ -122,9 +119,9 @@ class CadastroServico(FlaskForm):
         data_entrada = DateField('Data de Entrada',id='data_entrada',default='',validators=[DataRequired()])
         data_previsao = DateField('Previsão de Entrega',id='data_previsao',default='',validators=[DataRequired()])
 
-        tipo_servico = SelectField('Tipo de Serviço',id='tipo_servico',choices=[('1','Revisão'),('2','Troca de Óleo'),('3','Troca de Pneu'),('4','Troca de Bateria')],validators=[DataRequired()])
-        prioridade = SelectField('Prioridade',id='prioridade',choices=[('1','Baixa'),('2','Média'),('3','Alta')],validators=[DataRequired()])
-        status = SelectField('Status',id='status',choices=[('1','Em andamento'),('2','Finalizado')],validators=[DataRequired()])
+        tipo_servico = SelectField('Tipo de Serviço',id='tipo_servico',choices=[(enum.value,enum.name) for enum in TipoServico],validators=[DataRequired()])
+        prioridade = SelectField('Prioridade',id='prioridade',choices=[(enum.value,enum.name) for enum in Prioridade],validators=[DataRequired()])
+        status = SelectField('Status',id='status',choices=[(enum.value,enum.name) for enum in StatusOs],validators=[DataRequired()])
         quilometragem = StringField('Quilometragem',id='quilometragem',validators=[DataRequired()])
 
         descricao = TextAreaField('Descrição',id='descricao')
@@ -134,6 +131,26 @@ class CadastroServico(FlaskForm):
         data_atualizacao = StringField('Data de Atualização',id='data_atualizacao')
 
         salvar = SubmitField('Salvar')
+
+class FormItemServico(FlaskForm):
+
+    id_item = HiddenField('id_item',id='id_item',validators=[DataRequired()])
+    
+    id_ordem_servico = HiddenField('id_ordem_servico',id='id_ordem_servico',validators=[DataRequired()])
+    id_produto = HiddenField('id_produto',id='id_produto',validators=[DataRequired()])
+    id_usuario = HiddenField('id_usuario',id='id_usuario',validators=[DataRequired()])
+
+    codigo = StringField('Código',id='codigo',validators=[DataRequired()])
+    nome_produto = StringField('Nome',id='nome',validators=[DataRequired()])
+
+
+
+    valor_unitario = StringField('Valor Unitário',id='valor_unitario',validators=[DataRequired()])
+    qtd = StringField('Quantidade',id='qtd',validators=[DataRequired()])
+    desconto = StringField('Desconto',id='desconto')
+    acrescimo = StringField('Acréscimo',id='acrescimo')
+    
+    descricao = StringField('Descrição',id='descricao')
 
 
 

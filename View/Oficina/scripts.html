@@ -1,5 +1,5 @@
 <script>
-    document.getElementById('btnSalvar').addEventListener('click', function() {
+    document.getElementById('btnSalvar').addEventListener('click', function () {
         // Coletar os dados modificados dos campos de entrada
         var dadosModificados = {
             id: document.getElementById('id').value,
@@ -7,7 +7,7 @@
             razao_social: document.getElementById('razao_social').value,
             // Continue para os outros campos...
         };
-    
+
         // Enviar os dados modificados para o backend
         fetch('/salvar_dados', {
             method: 'POST',
@@ -16,16 +16,15 @@
             },
             body: JSON.stringify(dadosModificados)
         })
-        .then(response => response.json())
-        .then(data => {
-            // Exibir uma mensagem de sucesso ou erro, ou executar outras ações
-            console.log(data.mensagem);
-            // Recarregar a página após o salvamento bem-sucedido
-            window.location.reload();
-        })
-        .catch(error => {
-            console.error('Erro ao salvar os dados:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                // Exibir uma mensagem de sucesso ou erro, ou executar outras ações
+                console.log(data.mensagem);
+                // Recarregar a página após o salvamento bem-sucedido
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erro ao salvar os dados:', error);
+            });
     });
-    </script>
-    
+</script>

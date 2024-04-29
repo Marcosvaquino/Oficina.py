@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify, redirect,render_template,request, session,url_for
 from Model.cliente import Cliente
 from Controller.clienteBLL import ClienteBLL
-from Controller.form import CadastroCliente
+from Controller.form import FormCliente
 
 cliente = Blueprint('cliente',__name__,template_folder="View")
 
 @cliente.route('/cliente')
 def index_cliente():
-    form = CadastroCliente()
+    form = FormCliente()
     return render_template('Clientes/cliente.html',clientes = ClienteBLL.getListClientes(),form = form,pagina='Clientes')
 
 @cliente.route('/cliente/cadastrar', methods=['POST'])
