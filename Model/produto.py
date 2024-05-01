@@ -18,7 +18,4 @@ class Produto(db.Model):
     estoque_minimo: int = db.Column(db.Float)
     tipo: int = db.Column(db.Integer)
     data_criacao: datetime = db.Column(db.DateTime, default=datetime.now)
-    data_atualizacao: datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    obs: str = db.Column(db.String(200))
-
-  
+    data_atualizacao: datetime = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)  
