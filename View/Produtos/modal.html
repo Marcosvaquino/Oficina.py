@@ -1,7 +1,11 @@
 <div id="modalProduto" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModalProdutos()">&times;</span>
-            <form action="/produto/cadastrar" method="post">
+
+        <div class="modal-header">
+            <span class="close" onclick="closeModalProdutos()">&times;</span>
+        </div>
+
+        <form action="/produto/cadastrar" method="post">
             <fieldset>
                 <form>
 
@@ -11,42 +15,75 @@
                         <input type="text" name="id_cliente" hidden>
                         <input type="text" name="id_oficina" hidden>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="codigo">Codigo</label>
                             <input type="text" class="form-control" name="codigo" required>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <label for="codigo_barras">Codigo Barras</label>
+                            <input type="text" class="form-control" name="codigo_barras" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="codigo_fabricante">Codigo Fabricante</label>
+                            <input type="text" class="form-control" name="codigo_fabricante" required>
+                        </div>
+
+                        <div class="form-group col-md-9">
                             <label for="descricao">Descricao</label>
                             <input type="text" class="form-control" name="descricao" required>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
+                            <label for="tipo">Tipo</label>
+                            <select class="form-control" name="tipo" required>
+                                <option value="0">Produto</option>
+                                <option value="1">Serviço</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
                             <label for="preco">Preço</label>
                             <input type="text" class="form-control" name="preco" required>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="precoCusto">Preço de Custo</label>
                             <input type="text" class="form-control" name="preco_custo" required>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="estoque">Estoque</label>
                             <input type="text" class="form-control" name="estoque" required>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="tipo">tipo [produto ou serviço]</label>
-                            <input type="text" class="form-control" name="tipo" required>
+                        <div class="form-group col-md-3">
+                            <label for="estoque_minimo">Estoque Minimo</label>
+                            <input type="text" class="form-control" name="estoque_minimo" required>
                         </div>
 
                     </div>
 
-                    <button type="submit" class="btn btn-success">Salvar</button>
-
                 </form>
             </fieldset>
-            </form>
+        </form>
+
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success btn-block">Salvar</button>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="data_cadastro">cadastrado em:</label>
+                    <input type="text" style="border: none; outline: none;" name="data_cadastro">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="data_atualizacao">atualizado em:</label>
+                    <input type="text" style="border: none; outline: none;" name="data_atualizacao">
+                </div>
+
+            </div>
+        </div>
     </div>
-</div>

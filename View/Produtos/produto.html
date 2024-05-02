@@ -1,113 +1,117 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Lista de Produtos {% endblock %} 
+{% block title %} Lista de Produtos {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-  <link href="/static/assets/css/modal.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="/static/assets/css/modal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock stylesheets %}
 
 {% block content %}
-  <div class="container-fluid py-4">
+<div class="container-fluid py-4">
 
-    <div class="row">
+  <div class="row">
 
-      <div class="col-12">
-        
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Produtos Cadastrados</h6>
-            <button class="btn bg-gradient-primary" onclick="openModalProdutos('0')">Cadastrar novo</button>
-          </div>
+    <div class="col-12">
+
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <h6 class="text-white text-capitalize ps-3">Produtos Cadastrados</h6>
+          <button class="btn bg-gradient-primary" onclick="openModalProdutos('0')">Cadastrar novo</button>
         </div>
+      </div>
 
-        <div class="card my-4">
-          <div class="card-body px-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo do produto</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço produto</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço custo</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estoque</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
-                    <th class="text-secondary opacity-7"></th>
-                  </tr>
-                </thead>
-                <tbody>
+      <div class="card my-4">
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Codigo do produto</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço produto</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço custo</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estoque</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+              </thead>
+              <tbody>
 
-                  {% for produto in produtos %}
+                {% for produto in produtos %}
 
-                    <tr data-id="{{ produto.id}}">
+                <tr data-id="{{ produto.id}}">
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.codigo}}</h6>
+                      </div>
+                    </div>
+                  </td>
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.descricao}}</h6>
+                      </div>
+                    </div>
+                  </td>
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.preco}}</h6>
+                      </div>
+                    </div>
+                  </td>
 
-                      <td>
-                        <div class=" d-flex px-2 py-1">
+                  <td>
+                    <div class=" d-flex px-2 py-1">
 
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.preco_custo}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.preco_custo}}</h6>
+                      </div>
+                    </div>
+                  </td>
 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
-                          </div>
-                        </div>
-                      </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{produto.estoque}}</h6>
+                      </div>
+                    </div>
+                  </td>
 
-                      {% if produto.tipo == 0 %}
-                        <td class="align-middle text-sm">
-                          <span class="badge badge-sm bg-gradient-success">Peça</span>
-                        </td>
-                      {% else %}
-                        <td class="align-middle text-sm">
-                          <span class="badge badge-sm bg-primary">Produto</span>
-                        </td>
-                      {% endif %}
+                  {% if produto.tipo == 0 %}
+                  <td class="align-middle text-sm">
+                    <span class="badge badge-sm bg-gradient-success">Produto</span>
+                  </td>
+                  {% else %}
+                  <td class="align-middle text-sm">
+                    <span class="badge badge-sm bg-primary">Serviço</span>
+                  </td>
+                  {% endif %}
 
-                    </tr>
-                  {% endfor%}
-                </tbody>
-              </table>
-            </div>
+                  <td class="align-middle">
+                    <button class="btn bg-gradient-primary"
+                      onclick="openModalProdutos('{{produto.id}}')">Editar</button>
+                  </td>
+
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    {% include 'Produtos/modal.html' %}
+  {% include 'Produtos/modal.html' %}
 
-  </div>    
-
+</div>
 
 {% endblock content %}
 
