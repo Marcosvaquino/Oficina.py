@@ -18,6 +18,9 @@ class UsuarioBLL():
     # Listando todos os usuários cadastrados
     def getListUsuarios():
         return db.session.query(Usuario).all()
+    
+    def getListOperadores():
+        return db.session.query(Usuario.id,Usuario.nome).filter_by(tipo=2).all()
 
     def getListUsuariosOficina():
         return db.session.query(Usuario).filter_by(id_oficina=session['id_oficina']).all()

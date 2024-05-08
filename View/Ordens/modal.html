@@ -14,42 +14,62 @@
 
                     <div class="form-group col-md-6">
                         {{ formItem.codigo.label }}
-                        {{ formItem.codigo(class="form-control", id="codigo", value='') }}
+                        <div class="input-group">
+                            {{ formItem.codigo(class="form-control", id="codigo", value='') }}
+                            <div class="input-group-append" id="buttons">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="buscarProdutoPorCodigo(document.getElementById('codigo').value)"><i
+                                        class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.nome_produto.label }}
-                        {{ formItem.nome_produto(class="form-control", id="nome_produto", value='') }}
+                        {{ formItem.nome_produto(class="form-control", id="nome_produto", autocomplete="on", value='')
+                        }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.valor_unitario.label }}
-                        {{ formItem.valor_unitario(class="form-control", id="valor_unitario", value=0) }}
+                        {{ formItem.valor_unitario(class="form-control", id="valor_unitario",onfocusout="Moeda(this)")
+                        }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.qtd.label }}
-                        {{ formItem.qtd(class="form-control", id="qtd", value=1) }}
+                        {{ formItem.qtd(class="form-control", id="qtd", oninput="Estoque(this)") }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.desconto.label }}
-                        {{ formItem.desconto(class="form-control", id="desconto", value=0) }}
+                        {{ formItem.desconto(class="form-control", id="desconto",oninput="Moeda(this)") }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.acrescimo.label }}
-                        {{ formItem.acrescimo(class="form-control", id="acrescimo", value=0) }}
+                        {{ formItem.acrescimo(class="form-control", id="acrescimo",oninput="Moeda(this)") }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ formItem.select_usuario_item.label }}
+                        {{ formItem.select_usuario_item(class="form-control", id="select_usuario_item") }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ formItem.status_item.label }}
+                        {{ formItem.status_item(class="form-control", id="status_item") }}
                     </div>
 
                     <div class="form-group col-md-12">
                         {{ formItem.descricao.label }}
-                        {{ formItem.descricao(class="form-control", id="descricao", value='') }}
+                        {{ formItem.descricao(class="form-control", id="descricao",onkeyup="MoedaKeyUp(this)") }}
                     </div>
 
                 </div>
 
-                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="submit" class="btn btn-success">Incluir <i class="fa fa-plus-circle"
+                        aria-hidden="true"></i></button>
 
             </fieldset>
         </form>

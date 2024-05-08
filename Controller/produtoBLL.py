@@ -7,8 +7,14 @@ class ProdutoBLL():
         db.session.commit()
         
     #localizando produto na lista de produtos
-    def getProduto(id:str)->Produto:
+    def getProdutoId(id:int)->Produto:
         return db.session.query(Produto).filter_by(id=id).first()
+    
+    def getProdutoCodigo(codigo:str)->Produto:
+        return db.session.query(Produto).filter_by(codigo=codigo).first()
+    
+    def getPridutoDescricao(descricao:str)->Produto:
+        return db.session.query(Produto).filter_by(descricao=descricao).first()
 
     #listando todos os produto na lista de produtos
     def getListadeProdutos()->list:

@@ -2,6 +2,11 @@ from dataclasses import dataclass
 from enum import Enum
 from Data.base import db
 
+class TipoVeiculo(Enum):
+    carro = 0
+    moto = 1
+    caminhao = 2
+
 @dataclass
 class Oficina(db.Model):
     id:int = db.Column(db.Integer, primary_key=True)
@@ -24,12 +29,12 @@ class Oficina(db.Model):
     cargo_responsavel: str  = db.Column(db.String)
     telefone_comercial: int = db.Column(db.Integer)
     
-    tipo_veiculo: str  = db.Column(db.Integer)
+    tipo_veiculo: int  = db.Column(db.Integer)
 
-class TipoVeiculo(Enum):
-    carro = 0
-    moto = 1
-    caminhao = 2
+    def tipoVeiculo(self):
+        return TipoVeiculo(self.tipo_veiculo)
+
+
     
     
 

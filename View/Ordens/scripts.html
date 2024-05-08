@@ -1,5 +1,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="/static/assets/js/funcoes/formatacao.js"></script>
 
 <script>
 
@@ -7,6 +8,7 @@
 
     var nomes = [];
     var placas = [];
+    var produtos = [];
 
     function buscarPlacas() {
       $.getJSON('/placa/autocomplete', function (data, status, xhr) {
@@ -24,9 +26,19 @@
       });
     };
 
+    function buscarProdutos() {
+      $.getJSON('/produto/autocomplete', function (data, status, xhr) {
+        for (var i = 0; i < data.length; i++) {
+          produtos.push(data[i].descricao);
+        }
+      });
+    };
+
     buscarPlacas();
 
     buscarNomes();
+
+    buscarProdutos();
 
     $("#placa").autocomplete({
       source: placas,
@@ -37,6 +49,14 @@
 
     $("#nome").autocomplete({
       source: nomes,
+    });
+
+    $("#nome_produto").autocomplete({
+      source: produtos,
+      appendTo: "#modalItens",
+      select: function (event, ui) {
+        buscarProdutoPorDescricao(ui.item.value);
+      }
     });
 
   });
@@ -80,6 +100,42 @@
         console.error('Erro ao buscar cliente:', error);
       });
     desabilitarCamposCliente(true);
+  }
+
+  function buscarProdutoPorCodigo(cod) {
+    fetch('/produto/codigo/' + cod)
+      .then(response => response.json())
+      .then(produto => {
+        if (produto) {
+          document.getElementsByName('id_produto')[0].value = produto.id;
+          document.getElementsByName('codigo')[0].value = produto.codigo;
+          document.getElementsByName('nome_produto')[0].value = produto.descricao;
+          document.getElementsByName('valor_unitario')[0].value = produto.preco;
+        } else {
+          console.error('Produto não encontrado:', cod);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar produto:', error);
+      });
+  }
+
+  function buscarProdutoPorDescricao(desc) {
+    fetch('/produto/descricao/' + desc)
+      .then(response => response.json())
+      .then(produto => {
+        if (produto) {
+          document.getElementsByName('id_produto')[0].value = produto.id;
+          document.getElementsByName('codigo')[0].value = produto.codigo;
+          document.getElementsByName('nome_produto')[0].value = produto.descricao;
+          document.getElementsByName('valor_unitario')[0].value = produto.preco;
+        } else {
+          console.error('Produto não encontrado:', desc);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar produto:', error);
+      });
   }
 
   function desabilitarCamposCliente(habilitado = true) {

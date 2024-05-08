@@ -1,8 +1,9 @@
-from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import DateField, HiddenField, StringField, PasswordField,SelectField, SubmitField, TextAreaField
+from wtforms import DateField, DecimalField,  HiddenField,  StringField, PasswordField,SelectField, SubmitField, TextAreaField
 from wtforms.validators import Email, DataRequired
 
+from Controller.usuarioBLL import UsuarioBLL
+from Model.item_servico import StatusItem
 from Model.ordem_servico import StatusOs, TipoServico, Prioridade
 
 class LoginForm(FlaskForm):
@@ -143,12 +144,15 @@ class FormItemServico(FlaskForm):
     codigo = StringField('Código',id='codigo',validators=[DataRequired()])
     nome_produto = StringField('Nome',id='nome',validators=[DataRequired()])
 
+    status_item = SelectField('Status',id='status',choices=[(enum.value,enum.name) for enum in StatusItem],validators=[DataRequired()])
+    select_usuario_item = SelectField('Operador',id='select_usuario',choices= UsuarioBLL.getListOperadores)
 
+    valor_unitario = DecimalField('Valor Unitário',id='valor_unitario',validators=[DataRequired()])
+    
+    qtd = DecimalField('Quantidade',id='qtd',default=1.000,validators=[DataRequired()])
 
-    valor_unitario = StringField('Valor Unitário',id='valor_unitario',validators=[DataRequired()])
-    qtd = StringField('Quantidade',id='qtd',validators=[DataRequired()])
-    desconto = StringField('Desconto',id='desconto')
-    acrescimo = StringField('Acréscimo',id='acrescimo')
+    desconto = DecimalField('Desconto',id='desconto',default=0.00)
+    acrescimo = DecimalField('Acréscimo',id='acrescimo',default=0.00)
     
     descricao = StringField('Descrição',id='descricao')
 

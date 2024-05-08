@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect,render_template,request,url_for
+from flask import Blueprint, jsonify, redirect,render_template,request,url_for
 from Model.produto import Produto
 from Controller.produtoBLL import *
 
@@ -20,10 +20,31 @@ def cadastrar():
     novo_produto.preco= request.form['preco']
     novo_produto.preco_custo= request.form['preco_custo']
     novo_produto.estoque= request.form['estoque']
-    novo_produto.tipo= request.form['tipo']
-      
+    novo_produto.tipo= request.form['tipo']      
     
     ProdutoBLL.setProduto(novo_produto)
     
     return redirect(url_for('produto.index_produto'))
 
+@produto.route('/produto/autocomplete')
+def nome_autocomplete():
+  
+  produtos = ProdutoBLL.getListadeProdutos() 
+  
+  prods = [{'descricao': p.descricao} for p in produtos]
+
+  print(prods)
+
+  return jsonify(prods)
+
+@produto.route('/produto/<int:id>')
+def getProduto(id):
+    return jsonify(ProdutoBLL.getProdutoId(id))
+
+@produto.route('/produto/codigo/<string:codigo>')
+def getProdutoCodigo(codigo):
+    return jsonify(ProdutoBLL.getProdutoCodigo(codigo))
+
+@produto.route('/produto/descricao/<string:descricao>')
+def getProdutoDescricao(descricao):
+    return jsonify(ProdutoBLL.getPridutoDescricao(descricao))
