@@ -1,5 +1,18 @@
-<button class="btn btn-primary" onclick="openModalItens('0')">Adicionar Itens</button>
+{% if os.id %}
+<button class="btn btn-primary" onclick="openModalItens('0')">Adicionar Itens <i class="fa fa-cart-plus"
+        aria-hidden="true"></i></button>
+{% endif %}
+
+{% if itens|length == 0 %}
+
+<div class="alert alert-warning" role="alert">
+    O.S. sem itens
+</div>
+
+{% endif %}
+
 {% if itens|length > 0 %}
+
 <div class="table-responsive p-0">
     <table class="table align-items-center mb-0">
         <thead>

@@ -147,14 +147,14 @@ class FormItemServico(FlaskForm):
     status_item = SelectField('Status',id='status',choices=[(enum.value,enum.name) for enum in StatusItem],validators=[DataRequired()])
     select_usuario_item = SelectField('Operador',id='select_usuario',choices= UsuarioBLL.getListOperadores)
 
-    valor_unitario = DecimalField('Valor Unitário',id='valor_unitario',validators=[DataRequired()])
+    valor_unitario = DecimalField('Valor Unitário',id='valor_unitario',
+                                  places=2,
+                                  number_format='#.##0,00',
+                                  validators=[DataRequired()])
     
     qtd = DecimalField('Quantidade',id='qtd',default=1.000,validators=[DataRequired()])
 
     desconto = DecimalField('Desconto',id='desconto',default=0.00)
     acrescimo = DecimalField('Acréscimo',id='acrescimo',default=0.00)
     
-    descricao = StringField('Descrição',id='descricao')
-
-
-
+    descricao = StringField('Descrição',id='descricao') 

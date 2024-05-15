@@ -8,9 +8,9 @@
 
                     {{ formItem.hidden_tag() }}
 
-                    {{ formItem.id_item(class="form-control", id="id", value=os.id) }}
                     {{ formItem.id_ordem_servico(class="form-control", id="id_ordem_servico", value=os.id) }}
-                    {{ formItem.id_produto(class="form-control", id="id_produto", value=os.id) }}
+                    {{ formItem.id_item(class="form-control", id="id") }}
+                    {{ formItem.id_produto(class="form-control", id="id_produto") }}
 
                     <div class="form-group col-md-6">
                         {{ formItem.codigo.label }}
@@ -32,23 +32,23 @@
 
                     <div class="form-group col-md-6">
                         {{ formItem.valor_unitario.label }}
-                        {{ formItem.valor_unitario(class="form-control", id="valor_unitario",onfocusout="Moeda(this)")
+                        {{ formItem.valor_unitario(class="form-control", id="valor_unitario")
                         }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.qtd.label }}
-                        {{ formItem.qtd(class="form-control", id="qtd", oninput="Estoque(this)") }}
+                        {{ formItem.qtd(class="form-control", id="qtd") }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.desconto.label }}
-                        {{ formItem.desconto(class="form-control", id="desconto",oninput="Moeda(this)") }}
+                        {{ formItem.desconto(class="form-control", id="desconto") }}
                     </div>
 
                     <div class="form-group col-md-6">
                         {{ formItem.acrescimo.label }}
-                        {{ formItem.acrescimo(class="form-control", id="acrescimo",oninput="Moeda(this)") }}
+                        {{ formItem.acrescimo(class="form-control", id="acrescimo") }}
                     </div>
 
                     <div class="form-group col-md-6">
@@ -63,7 +63,7 @@
 
                     <div class="form-group col-md-12">
                         {{ formItem.descricao.label }}
-                        {{ formItem.descricao(class="form-control", id="descricao",onkeyup="MoedaKeyUp(this)") }}
+                        {{ formItem.descricao(class="form-control", id="descricao") }}
                     </div>
 
                 </div>
